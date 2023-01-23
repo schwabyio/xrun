@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>xRunner Collection Results</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+  <!-- Prism CSS -->
+  {{!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css" integrity="sha512-mIs9kKbaw6JZFfSuo+MovjU+Ntggfoj8RwAmJbVXQ5mkAX5LlgETQEweFPI18humSPHymTb5iikEOKWF7I8ncQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
+
+  <!-- Bootstrap JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+  <!-- Prism JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  {{!-- https://stackoverflow.com/questions/66791309/trying-to-change-the-background-color-of-the-bootstrap-accordion-title-when-open --}}
+  <style>
+    .accordion-button:not(.collapsed) {
+      background-color: #0a58ca;
+    }
+
+    .maxHeight {
+      height: 200px;
+    }
+  </style>
+
+  <!-- Prism - Atom Dark CSS -->
+  {{!-- <style>
+    code[class*="language-"],pre[class*="language-"]{color:#c5c8c6;text-shadow:0 1px rgba(0,0,0,0.3);font-family:Inconsolata,Monaco,Consolas,'Courier New',Courier,monospace;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*="language-"]{padding:1em;margin:.5em 0;overflow:auto;border-radius:.3em}:not(pre)>code[class*="language-"],pre[class*="language-"]{background:#1d1f21}:not(pre)>code[class*="language-"]{padding:.1em;border-radius:.3em}.token.comment,.token.prolog,.token.doctype,.token.cdata{color:#7c7c7c}.token.punctuation{color:#c5c8c6}.namespace{opacity:.7}.token.property,.token.keyword,.token.tag{color:#96cbfe}.token.class-name{color:#ffffb6;text-decoration:underline}.token.boolean,.token.constant{color:#9c9}.token.symbol,.token.deleted{color:#f92672}.token.number{color:#ff73fd}.token.selector,.token.attr-name,.token.string,.token.char,.token.builtin,.token.inserted{color:#a8ff60}.token.variable{color:#c6c5fe}.token.operator{color:#ededed}.token.entity{color:#ffffb6;cursor:help}.token.url{color:#96cbfe}.language-css .token.string,.style .token.string{color:#87c38a}.token.atrule,.token.attr-value{color:#f9ee98}.token.function{color:#dad085}.token.regex{color:#e9c062}.token.important{color:#fd971f}.token.important,.token.bold{font-weight:bold}.token.italic{font-style:italic}
+  </style> --}}
+
+  <!-- Prism - Xonokai CSS -->
+  {{!-- <style>
+    code[class*="language-"],pre[class*="language-"]{-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none;white-space:pre;white-space:pre-wrap;word-wrap:normal;font-family:Menlo,Monaco,"Courier New",monospace;font-size:14px;color:#76d9e6;text-shadow:none}pre>code[class*="language-"]{font-size:1em}pre[class*="language-"],:not(pre)>code[class*="language-"]{background:#2a2a2a}pre[class*="language-"]{padding:15px;border-radius:4px;border:1px solid #e1e1e8;overflow:auto;position:relative}pre[class*="language-"] code{white-space:pre;display:block}:not(pre)>code[class*="language-"]{padding:.15em .2em .05em;border-radius:.3em;border:.13em solid #7a6652;box-shadow:1px 1px .3em -0.1em #000 inset}.token.namespace{opacity:.7}.token.comment,.token.prolog,.token.doctype,.token.cdata{color:#6f705e}.token.operator,.token.boolean,.token.number{color:#a77afe}.token.attr-name,.token.string{color:#e6d06c}.token.entity,.token.url,.language-css .token.string,.style .token.string{color:#e6d06c}.token.selector,.token.inserted{color:#a6e22d}.token.atrule,.token.attr-value,.token.keyword,.token.important,.token.deleted{color:#ef3b7d}.token.regex,.token.statement{color:#76d9e6}.token.placeholder,.token.variable{color:#fff}.token.important,.token.statement,.token.bold{font-weight:bold}.token.punctuation{color:#bebec5}.token.entity{cursor:help}.token.italic{font-style:italic}code.language-markup{color:#f9f9f9}code.language-markup .token.tag{color:#ef3b7d}code.language-markup .token.attr-name{color:#a6e22d}code.language-markup .token.attr-value{color:#e6d06c}code.language-markup .token.style,code.language-markup .token.script{color:#76d9e6}code.language-markup .token.script .token.keyword{color:#76d9e6}.line-highlight.line-highlight{padding:0;background:rgba(255,255,255,0.08)}.line-highlight.line-highlight:before,.line-highlight.line-highlight[data-end]:after{padding:.2em .5em;background-color:rgba(255,255,255,0.4);color:black;height:1em;line-height:1em;box-shadow:0 1px 1px rgba(255,255,255,0.7)}
+  </style> --}}
+
+  <!-- Prism - One Dark CSS -->
+  <style>
+    code[class*="language-"],pre[class*="language-"]{background:hsl(220,13%,18%);color:hsl(220,14%,71%);text-shadow:0 1px rgba(0,0,0,0.3);font-family:"Fira Code","Fira Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;line-height:1.5;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}code[class*="language-"]::-moz-selection,code[class*="language-"] *::-moz-selection,pre[class*="language-"] *::-moz-selection{background:hsl(220,13%,28%);color:inherit;text-shadow:none}code[class*="language-"]::selection,code[class*="language-"] *::selection,pre[class*="language-"] *::selection{background:hsl(220,13%,28%);color:inherit;text-shadow:none}pre[class*="language-"]{padding:1em;margin:.5em 0;overflow:auto;border-radius:.3em}:not(pre)>code[class*="language-"]{padding:.2em .3em;border-radius:.3em;white-space:normal}@media print{code[class*="language-"],pre[class*="language-"]{text-shadow:none}}.token.comment,.token.prolog,.token.cdata{color:hsl(220,10%,40%)}.token.doctype,.token.punctuation,.token.entity{color:hsl(220,14%,71%)}.token.attr-name,.token.class-name,.token.boolean,.token.constant,.token.number,.token.atrule{color:hsl(29,54%,61%)}.token.keyword{color:hsl(286,60%,67%)}.token.property,.token.tag,.token.symbol,.token.deleted,.token.important{color:hsl(355,65%,65%)}.token.selector,.token.string,.token.char,.token.builtin,.token.inserted,.token.regex,.token.attr-value,.token.attr-value>.token.punctuation{color:hsl(95,38%,62%)}.token.variable,.token.operator,.token.function{color:hsl(207,82%,66%)}.token.url{color:hsl(187,47%,55%)}.token.attr-value>.token.punctuation.attr-equals,.token.special-attr>.token.attr-value>.token.value.css{color:hsl(220,14%,71%)}.language-css .token.selector{color:hsl(355,65%,65%)}.language-css .token.property{color:hsl(220,14%,71%)}.language-css .token.function,.language-css .token.url>.token.function{color:hsl(187,47%,55%)}.language-css .token.url>.token.string.url{color:hsl(95,38%,62%)}.language-css .token.important,.language-css .token.atrule .token.rule{color:hsl(286,60%,67%)}.language-javascript .token.operator{color:hsl(286,60%,67%)}.language-javascript .token.template-string>.token.interpolation>.token.interpolation-punctuation.punctuation{color:hsl(5,48%,51%)}.language-json .token.operator{color:hsl(220,14%,71%)}.language-json .token.null.keyword{color:hsl(29,54%,61%)}.language-markdown .token.url,.language-markdown .token.url>.token.operator,.language-markdown .token.url-reference.url>.token.string{color:hsl(220,14%,71%)}.language-markdown .token.url>.token.content{color:hsl(207,82%,66%)}.language-markdown .token.url>.token.url,.language-markdown .token.url-reference.url{color:hsl(187,47%,55%)}.language-markdown .token.blockquote.punctuation,.language-markdown .token.hr.punctuation{color:hsl(220,10%,40%);font-style:italic}.language-markdown .token.code-snippet{color:hsl(95,38%,62%)}.language-markdown .token.bold .token.content{color:hsl(29,54%,61%)}.language-markdown .token.italic .token.content{color:hsl(286,60%,67%)}.language-markdown .token.strike .token.content,.language-markdown .token.strike .token.punctuation,.language-markdown .token.list.punctuation,.language-markdown .token.title.important>.token.punctuation{color:hsl(355,65%,65%)}.token.bold{font-weight:bold}.token.comment,.token.italic{font-style:italic}.token.entity{cursor:help}.token.namespace{opacity:.8}.token.token.tab:not(:empty):before,.token.token.cr:before,.token.token.lf:before,.token.token.space:before{color:hsla(220,14%,71%,0.15);text-shadow:none}div.code-toolbar>.toolbar.toolbar>.toolbar-item{margin-right:.4em}div.code-toolbar>.toolbar.toolbar>.toolbar-item>button,div.code-toolbar>.toolbar.toolbar>.toolbar-item>a,div.code-toolbar>.toolbar.toolbar>.toolbar-item>span{background:hsl(220,13%,26%);color:hsl(220,9%,55%);padding:.1em .4em;border-radius:.3em}div.code-toolbar>.toolbar.toolbar>.toolbar-item>button:hover,div.code-toolbar>.toolbar.toolbar>.toolbar-item>button:focus,div.code-toolbar>.toolbar.toolbar>.toolbar-item>a:hover,div.code-toolbar>.toolbar.toolbar>.toolbar-item>a:focus,div.code-toolbar>.toolbar.toolbar>.toolbar-item>span:hover,div.code-toolbar>.toolbar.toolbar>.toolbar-item>span:focus{background:hsl(220,13%,28%);color:hsl(220,14%,71%)}.line-highlight.line-highlight{background:hsla(220,100%,80%,0.04)}.line-highlight.line-highlight:before,.line-highlight.line-highlight[data-end]:after{background:hsl(220,13%,26%);color:hsl(220,14%,71%);padding:.1em .6em;border-radius:.3em;box-shadow:0 2px 0 0 rgba(0,0,0,0.2)}pre[id].linkable-line-numbers.linkable-line-numbers span.line-numbers-rows>span:hover:before{background-color:hsla(220,100%,80%,0.04)}.line-numbers.line-numbers .line-numbers-rows,.command-line .command-line-prompt{border-right-color:hsla(220,14%,71%,0.15)}.line-numbers .line-numbers-rows>span:before,.command-line .command-line-prompt>span:before{color:hsl(220,14%,45%)}.rainbow-braces .token.token.punctuation.brace-level-1,.rainbow-braces .token.token.punctuation.brace-level-5,.rainbow-braces .token.token.punctuation.brace-level-9{color:hsl(355,65%,65%)}.rainbow-braces .token.token.punctuation.brace-level-2,.rainbow-braces .token.token.punctuation.brace-level-6,.rainbow-braces .token.token.punctuation.brace-level-10{color:hsl(95,38%,62%)}.rainbow-braces .token.token.punctuation.brace-level-3,.rainbow-braces .token.token.punctuation.brace-level-7,.rainbow-braces .token.token.punctuation.brace-level-11{color:hsl(207,82%,66%)}.rainbow-braces .token.token.punctuation.brace-level-4,.rainbow-braces .token.token.punctuation.brace-level-8,.rainbow-braces .token.token.punctuation.brace-level-12{color:hsl(286,60%,67%)}pre.diff-highlight>code .token.token.deleted:not(.prefix),pre>code.diff-highlight .token.token.deleted:not(.prefix){background-color:hsla(353,100%,66%,0.15)}pre.diff-highlight>code .token.token.deleted:not(.prefix)::-moz-selection,pre.diff-highlight>code .token.token.deleted:not(.prefix) *::-moz-selection,pre>code.diff-highlight .token.token.deleted:not(.prefix)::-moz-selection,pre>code.diff-highlight .token.token.deleted:not(.prefix) *::-moz-selection{background-color:hsla(353,95%,66%,0.25)}pre.diff-highlight>code .token.token.deleted:not(.prefix)::selection,pre.diff-highlight>code .token.token.deleted:not(.prefix) *::selection,pre>code.diff-highlight .token.token.deleted:not(.prefix)::selection,pre>code.diff-highlight .token.token.deleted:not(.prefix) *::selection{background-color:hsla(353,95%,66%,0.25)}pre.diff-highlight>code .token.token.inserted:not(.prefix),pre>code.diff-highlight .token.token.inserted:not(.prefix){background-color:hsla(137,100%,55%,0.15)}pre.diff-highlight>code .token.token.inserted:not(.prefix)::-moz-selection,pre.diff-highlight>code .token.token.inserted:not(.prefix) *::-moz-selection,pre>code.diff-highlight .token.token.inserted:not(.prefix)::-moz-selection,pre>code.diff-highlight .token.token.inserted:not(.prefix) *::-moz-selection{background-color:hsla(135,73%,55%,0.25)}pre.diff-highlight>code .token.token.inserted:not(.prefix)::selection,pre.diff-highlight>code .token.token.inserted:not(.prefix) *::selection,pre>code.diff-highlight .token.token.inserted:not(.prefix)::selection,pre>code.diff-highlight .token.token.inserted:not(.prefix) *::selection{background-color:hsla(135,73%,55%,0.25)}.prism-previewer.prism-previewer:before,.prism-previewer-gradient.prism-previewer-gradient div{border-color:hsl(224,13%,17%)}.prism-previewer-color.prism-previewer-color:before,.prism-previewer-gradient.prism-previewer-gradient div,.prism-previewer-easing.prism-previewer-easing:before{border-radius:.3em}.prism-previewer.prism-previewer:after{border-top-color:hsl(224,13%,17%)}.prism-previewer-flipped.prism-previewer-flipped.after{border-bottom-color:hsl(224,13%,17%)}.prism-previewer-angle.prism-previewer-angle:before,.prism-previewer-time.prism-previewer-time:before,.prism-previewer-easing.prism-previewer-easing{background:hsl(219,13%,22%)}.prism-previewer-angle.prism-previewer-angle circle,.prism-previewer-time.prism-previewer-time circle{stroke:hsl(220,14%,71%);stroke-opacity:1}.prism-previewer-easing.prism-previewer-easing circle,.prism-previewer-easing.prism-previewer-easing path,.prism-previewer-easing.prism-previewer-easing line{stroke:hsl(220,14%,71%)}.prism-previewer-easing.prism-previewer-easing circle{fill:transparent}
+  </style>
+
+  <script>
+    function updateButtonText(buttonId, buttonType, suffixText) {
+      var buttonText = "";
+      const expanded = document.getElementById(buttonId).getAttribute('aria-expanded')
+      
+      if (expanded === "true") {
+        if (buttonType === "hide") {
+          buttonText = "Hide " + suffixText
+        } else if (buttonType === "expand") {
+          buttonText = "Collapse " + suffixText;
+        }
+      } else {
+        if (buttonType === "hide") {
+          buttonText = "Show " + suffixText
+        } else if (buttonType === "expand") {
+          buttonText = "Expand " + suffixText
+        }
+      }
+
+      document.getElementById(buttonId).textContent = buttonText
+    }
+
+
+    function toggleAccordion(buttonId, buttonType, suffixText) {
+      const accordionItems = document.getElementsByClassName('accordion-collapse')
+      const buttonElement = document.getElementById(buttonId)
+      const expanded = buttonElement.getAttribute('aria-expanded')
+
+      if (expanded === "true") {
+        buttonText = "Expand " + suffixText
+        buttonElement.setAttribute('aria-expanded', "false")
+      } else {
+        buttonText = "Collapse " + suffixText
+        buttonElement.setAttribute('aria-expanded', "true")
+      }
+
+      buttonElement.textContent = buttonText
+
+      Object.values(accordionItems).forEach(function (item, index) {
+
+        const bsAccordion = new bootstrap.Collapse(item, {
+          toggle: false
+        })
+          
+          if (expanded === "true") {
+            bsAccordion.hide()
+          } else {
+            bsAccordion.show()
+          }
+        })
+    }
+  </script>
+</head>
+<body>
+  
+  <br>
+  <br>
+
+  <div class="container text-center">
+    <h2>xRunner Collection Results</h2>
+  </div>
+ 
+  <br>
+
+  <div class="container">
+    <div class="card">
+      <div class="card-header">Results Overview</div>
+      <div class="card-body">
+        <div class="grid text-start">
+
+          <div class="container">
+            <div class="row mb-3">
+              <div class="col-2">Collection Name</div>
+              <div class="col border rounded">{{collectionName}}</div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-2">Collection Description</div>
+              <div class="col border rounded">{{collectionDescriptionHtml}}</div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-2">Time of Run</div>
+              <div class="col-auto border rounded">{{dateTimeOfRunPrintable}}</div>
+            </div>            
+          </div>
+
+
+          <div class="card">
+              <table class="table table-borderless text-center">
+                <tbody>
+                    <tr class="bg-body-tertiary">
+                      <td scope="col">Collection Run Time</td>
+                      <td scope="col">Total Tests</td>
+                      <td scope="col">Tests Passed</td>
+                      <td scope="col">Tests Failed</td>
+                      <td scope="col">Total Assertions</td>
+                      <td scope="col">Assertions Passed</td>
+                      <td scope="col">Assertions Failed</td>
+                      <td scope="col">Overall Result</td>
+                    </tr>
+                  <tr class="border-top">
+                    <td>{{executionTimeTotalPrintable}}</td>
+                    <td>{{steps.length}}</td>
+                    <td>{{stepsPassed}}</td>
+                    <td>{{stepsFailed}}</td>
+                    <td>{{assertionsTotalPrintable}}</td>
+                    <td>{{assertionsPassedPrintable}}</td>
+                    <td>{{assertionsFailedPrintable}}</td>
+                    <td>
+                      {{#if collectionPassed}}
+                        <div class="text-success-emphasis">PASSED</div>
+                      {{else}}
+                        <div class="text-danger-emphasis">FAILED</div>
+                      {{/if}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+
+        </div>
+      </div>
+    </div>    
+  </div>
+
+
+  <br>
+  <br>
+  <br>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-2 text-start">
+        <h3>Tests</h3>
+      </div>
+
+      <div class="col text-end">
+        {{#if stepsPassed}}
+          <button class="btn btn-outline-secondary" id="button-toggle-passed" onclick="updateButtonText('button-toggle-passed', 'hide', 'Passed')" type="button" data-bs-toggle="collapse" data-bs-target=".passed" aria-pressed="true" aria-expanded="true">Hide Passed</button>
+        {{/if}}
+
+        {{#if stepsFailed}}
+          <button class="btn btn-outline-secondary" id="button-toggle-failed" onclick="updateButtonText('button-toggle-failed', 'hide', 'Failed')" type="button" data-bs-toggle="collapse" data-bs-target=".failed" aria-pressed="true" aria-expanded="true">Hide Failed</button>
+        {{/if}}
+
+        <button class="btn btn-outline-secondary" id="button-toggle-collapse" onclick="toggleAccordion('button-toggle-collapse', 'expand', 'All')" type="button" aria-expanded="true">Collapse All</button>
+      </div>
+
+    </div>
+
+      <div class="accordion" id="{{id}}">
+        {{#each steps}}
+          {{!-- partial --}}
+          {{> aggregations}}
+        {{/each}}
+      </div>
+
+  </div>
+
+  <footer class="mt-auto">
+    <br>
+    <br>
+    <br>
+    <div class="container text-center">
+      <div class="row">
+        <div class="col">
+          <a class="btn btn-outline-secondary" href="https://github.com/schwabyio/xrunner" role="button">xRunner Version {{xRunnerVersion}}</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
+
+
+{{#*inline "aggregations"}}
+
+  <div class="accordion-item {{stepResult}} show">
+    
+    <h2 class="accordion-header" id="heading-{{increment @index}}">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#step-{{increment @index}}" aria-expanded="true" aria-controls="step-{{increment @index}}">Test {{increment @index}}: {{name}}</button>
+    </h2>
+    
+    <div id="step-{{increment @index}}" class="accordion-collapse collapse show" aria-labelledby="heading-{{increment @index}}">
+      <div class="accordion-body">
+        
+        {{#with request}}
+
+          <div class="card">
+            <div class="card-header">Request</div>
+            <div class="card-body">
+              
+              <div class="grid text-start">
+                <div class="row mb-3">
+                  <div class="col-2">Request Method</div>
+                  <div class="col-auto border rounded">{{method}}</div>
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col-2">Request URL</div>
+                  <div class="col border rounded">{{url}}</div>
+                </div>
+
+                <div class="row mb-3 overflow-hidden maxHeight">
+                  <div class="col-2">Request Headers</div>
+                  <div class="col overflow-auto border rounded maxHeight"><pre>{{headersHtml}}</pre></div>
+                </div>
+
+                  {{#if body}}
+                    <div class="row mb-3 overflow-hidden maxHeight">
+                      <div class="col-2">Request Body</div>
+                      <div class="col overflow-auto border rounded maxHeight"><pre><code>{{bodyHtmlEscaped}}</code></pre></div>
+                    </div>
+                  {{/if}}
+              </div>
+
+            </div>
+          </div>
+
+        {{/with}}
+
+        <br>
+
+        {{#with response}}
+
+          <div class="card">
+            <div class="card-header">Response</div>
+            <div class="card-body">
+
+              <div class="grid text-start">
+                <div class="row mb-3">
+                  <div class="col-2">Response Code</div>
+                  <div class="col-auto border rounded">{{code}} {{status}}</div>
+                </div>
+
+                <div class="row mb-3 overflow-hidden maxHeight">
+                  <div class="col-2">Response Headers</div>
+                  <div class="col overflow-auto border rounded maxHeight"><pre>{{headersHtml}}</pre></div>
+                </div>
+
+                  {{#if body}}
+                    <div class="row mb-3 overflow-hidden maxHeight">
+                      <div class="col-2">Response Body</div>
+                      <div class="col overflow-auto border rounded maxHeight"><pre>{{bodyHtmlEscaped}}</pre></div>
+                    </div>
+                  {{/if}}
+
+                <div class="row mb-3">
+                  <div class="col-2">Response Time</div>
+                  <div class="col-auto border rounded">{{responseTime}}ms</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        {{/with}}
+
+        
+        <br>
+          <div class="card">
+            <div class="card-header">Assertions</div>
+            <div class="card-body">
+              <div class="grid text-start">
+
+                <div class="card w-25 mb-2">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col">Total Assertions Passed:</div>
+                      <div class="col-auto">{{assertions.passedCount}}</div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col">Total Assertions Failed:</div>
+                      <div class="col-auto">{{assertions.failedCount}}</div>
+                    </div>
+                  </div>
+                </div>
+
+                {{#if assertions.list.length}}
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="row">
+                        <div class="col text-start">Detail</div>
+                        <div class="col text-end">Result</div>
+                      </div>
+                    </div>
+
+                    <div class="card-body">
+                      {{#each assertions.list}}
+                        <div class="row">
+                          <div class="col text-start">{{this.assertionDetail}}</div>
+                          {{#compareStrings this.assertionResult "passed"}}
+                            <div class="text-success-emphasis col-1 text-end">PASSED</div>
+                          {{else}}
+                            <div class="text-danger-emphasis col-1 text-end">FAILED</div>
+                          {{/compareStrings}}
+                        </div>
+                      {{/each}}
+                    </div>
+                  </div>
+                {{/if}}
+
+              </div>
+            </div>
+          </div>
+
+      </div>
+    </div>
+
+  </div>
+
+{{/inline}}

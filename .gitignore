@@ -1,0 +1,11 @@
+# Mac files
+*.DS_Store
+
+# node_modules/
+node_modules/
+
+# test-results/
+test-results/
+
+# settings/settings.json
+settings/settings.json
