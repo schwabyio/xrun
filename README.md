@@ -1,4 +1,5 @@
-![Postman Image](https://assets.getpostman.com/common-share/postman-logo-horizontal-320x132.png)
+![xRunner Image](./resources/images/xrunner-logo-500.png)
+<!-- ![Postman Image](https://assets.getpostman.com/common-share/postman-logo-horizontal-320x132.png) -->
 
 
 ## Table of Contents
