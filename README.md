@@ -10,7 +10,7 @@
 
 <br>
 
-# xRunner - CLI Runner Interface Runner For Postman
+# xRunner - CLI Runner For Postman
 
 ## Overview
 xRunner is a command line interface (CLI) app that extends [Newman](https://github.com/postmanlabs/newman) to enable your organization to run Postman tests with speed and at scale. These are the xRunner specific features:
