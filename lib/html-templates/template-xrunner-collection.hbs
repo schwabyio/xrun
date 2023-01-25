@@ -308,21 +308,26 @@
           <div class="card">
             <div class="card-header">Assertions</div>
             <div class="card-body">
-              <div class="grid text-start">
+              <div class="grid">
 
-                <div class="card w-25 mb-2">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col">Total Assertions Passed:</div>
-                      <div class="col-auto">{{assertions.passedCount}}</div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col">Total Assertions Failed:</div>
-                      <div class="col-auto">{{assertions.failedCount}}</div>
-                    </div>
-                  </div>
+                <div class="card w-50 mx-auto">
+                  <table class="table table-borderless text-center">
+                    <tbody>
+                        <tr class="bg-body-tertiary">
+                          <td scope="col">Total Assertions</td>
+                          <td scope="col">Assertions Passed</td>
+                          <td scope="col">Assertions Failed</td>
+                        </tr>
+                      <tr class="border-top">
+                        <td>{{assertions.totalCount}}</td>
+                        <td>{{assertions.passedCount}}</td>
+                        <td>{{assertions.failedCount}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
+
+                <br>
 
                 {{#if assertions.list.length}}
                   <div class="card">
