@@ -29,9 +29,18 @@ xRunner is a command line interface (CLI) app that extends [Newman](https://gith
 
 ## Demos
 
-
+### Demo Main Commands
 
 https://user-images.githubusercontent.com/118861343/214518037-0f51a2fe-724c-41d3-b7a0-8d35f7ad0886.mp4
+
+
+### Demo Reporting
+
+
+
+https://user-images.githubusercontent.com/118861343/218165353-4081377f-78aa-4a14-9861-4f88ab1f39e8.mp4
+
+
 
 
 <br>
