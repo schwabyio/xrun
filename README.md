@@ -5,6 +5,8 @@
 ## Table of Contents
 - [Overview](#overview)
 - [Demos](#demos)
+  1. [Demo Primary Commands](#demo-primary-commands)
+  2. [Demo Reporting](#demo-reporting)
 - [Installation Steps](#installation-steps)
 - [Usage](#usage)
 - [Configurations](#configurations)
@@ -29,9 +31,13 @@ xRunner is a command line interface (CLI) app that extends [Newman](https://gith
 
 ## Demos
 
-### Demo Main Commands
+### Demo Primary Commands
 
-https://user-images.githubusercontent.com/118861343/214518037-0f51a2fe-724c-41d3-b7a0-8d35f7ad0886.mp4
+
+
+https://user-images.githubusercontent.com/118861343/221046986-2bb87d92-eb49-4531-b9f0-7f65d9ed540c.mp4
+
+
 
 
 ### Demo Reporting
