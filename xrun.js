@@ -2,10 +2,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 //                                                                            //
-//    xRunner.js - A more awesome way to run Postman tests from the           //
-//                 command line.                                              //
+//  xrun.js - A more awesome way to run Postman tests from the command line.  //
 //                                                                            //
-//                  Created by: schwaby.io                                    //
+//            Created by: schwaby.io                                          //
 //                                                                            //
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -14,30 +13,30 @@
 //INITIALIZE DEPENDENT MODULES
 //////////////////////////////////
 try {
-  const xRunnerLib = require('./lib/xrunner-lib')
+  const xRunLib = require('./lib/xrun-lib')
 
     //Initialize constants
-  const xRunner = new xRunnerLib()
+  const xRun = new xRunLib()
   const programCommand = process.argv[2] || ''
 
 
   if (! programCommand) {
     //Usage
-    console.log(xRunner.getUsage())
+    console.log(xRun.getUsage())
     process.exit(1)
   } else {
     if (programCommand === 'g' || programCommand === 'get') {
-      xRunner.getDirectoryList(function resultOfGetDirectoryList(errMsg, directoryList) {
+      xRun.getDirectoryList(function resultOfGetDirectoryList(errMsg, directoryList) {
         if (errMsg) {
           console.log(errMsg)
           process.exit(1)
         } else {
-          xRunner.createXRunnerObject(directoryList, function resultOfCreateXRunnerObject(errMsg, xRunnerObject) {
+          xRun.createXRunObject(directoryList, function resultOfCreateXRunObject(errMsg, xRunObject) {
             if (errMsg) {
               console.log(errMsg)
               process.exit(1)
             } else {
-              xRunner.getCollectionInfo(xRunnerObject, function resultOfGetCollectionInfo(errMsg, collectionInfoObject, collectionInfoString) {
+              xRun.getCollectionInfo(xRunObject, function resultOfGetCollectionInfo(errMsg, collectionInfoObject, collectionInfoString) {
                 if (errMsg) {
                   console.log(errMsg)
                   process.exit(1)
@@ -51,17 +50,17 @@ try {
         }
       })
     } else if (programCommand === 'a' || programCommand === 'all') {
-      xRunner.getDirectoryList(function resultOfGetDirectoryList(errMsg, directoryList) {
+      xRun.getDirectoryList(function resultOfGetDirectoryList(errMsg, directoryList) {
         if (errMsg) {
           console.log(errMsg)
           process.exit(1)
         } else {
-          xRunner.createXRunnerObject(directoryList, function resultOfCreateXRunnerObject(errMsg, xRunnerObject) {
+          xRun.createXRunObject(directoryList, function resultOfCreatexRunObject(errMsg, xRunObject) {
             if (errMsg) {
               console.log(errMsg)
               process.exit(1)
             } else {
-              xRunner.run(xRunnerObject, true, function resultOfRun(errMsg, testFinalResult) {
+              xRun.run(xRunObject, true, function resultOfRun(errMsg, testFinalResult) {
                 if (errMsg) {
                   console.log(errMsg)
                   process.exit(1)
@@ -81,22 +80,22 @@ try {
       //Set collectionCSVList
       const collectionCSVList = programCommand
 
-      xRunner.getDirectoryList(function resultOfGetDirectoryList(errMsg, directoryList) {
+      xRun.getDirectoryList(function resultOfGetDirectoryList(errMsg, directoryList) {
         if (errMsg) {
           console.log(errMsg)
           process.exit(1)
         } else {
-          xRunner.createXRunnerObject(directoryList, function resultOfCreateXRunnerObject(errMsg, xRunnerObject) {
+          xRun.createXRunObject(directoryList, function resultOfCreatexRunObject(errMsg, xRunObject) {
             if (errMsg) {
               console.log(errMsg)
               process.exit(1)
             } else {
-              xRunner.filterXRunnerObjectFromCollectionList(xRunnerObject, collectionCSVList, function resultOfFilter(errMsg, xRunnerObject) {
+              xRun.filterXRunObjectFromCollectionList(xRunObject, collectionCSVList, function resultOfFilter(errMsg, xRunObject) {
                 if (errMsg) {
                   console.log(errMsg)
                   process.exit(1)
                 } else {
-                  xRunner.run(xRunnerObject, true, function resultOfRun(errMsg, testFinalResult) {
+                  xRun.run(xRunObject, true, function resultOfRun(errMsg, testFinalResult) {
                     if (errMsg) {
                       console.log(errMsg)
                       process.exit(1)

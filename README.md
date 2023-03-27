@@ -1,4 +1,4 @@
-![xRunner Image](./resources/images/xrunner-logo-500.png)
+![xRun Image](./resources/images/xrun-logo-500.png)
 <!-- ![Postman Image](https://assets.getpostman.com/common-share/postman-logo-horizontal-320x132.png) -->
 
 
@@ -14,10 +14,10 @@
 
 <br>
 
-# xRunner - CLI Runner For Postman
+# xRun - CLI Runner For Postman
 
 ## Overview
-xRunner is a command line interface (CLI) app that extends [Newman](https://github.com/postmanlabs/newman) to enable your organization to run Postman tests with speed and at scale. These are the xRunner specific features:
+xRun is a command line interface (CLI) app that extends [Newman](https://github.com/postmanlabs/newman) to enable your organization to run Postman tests with speed and at scale. These are the xRun specific features:
 * Direct support for [xtest](https://github.com/schwabyio/xtest)
 * Run tests locally or as part of Continuous Integration (CI) testing
 * Configuration support using a settings.json file with command line override capability
@@ -53,18 +53,18 @@ https://user-images.githubusercontent.com/118861343/218165353-4081377f-78aa-4a14
 
 ## Installation Steps
 1. Prerequisite: Install [Node.js](https://nodejs.org/en/download/) (skip step if you already have)
-2. Clone xRunner project in the location of your choice (i.e. `[YOUR-GIT-BASE-PATH]`):
+2. Clone xRun project in the location of your choice (i.e. `[YOUR-GIT-BASE-PATH]`):
 ```console
-git clone git@github.com:schwabyio/xrunner.git
+git clone git@github.com:schwabyio/xrun.git
 ```
 3. Install dependencies:
 ```console
-cd xrunner
+cd xrun
 npm install
 ```
 4. Create the following settings.json file (NOTE: this file is not stored in Git):
 ```console
-[YOUR-GIT-BASE-PATH]/xrunner/settings/settings.json
+[YOUR-GIT-BASE-PATH]/xrun/settings/settings.json
 ```
 5. Edit the settings.json with the configurations for your testing needs. All configurations are documented [here](lib/config.js). NOTE: comments are allowed. Below is an example:
 ```console
@@ -77,7 +77,7 @@ npm install
     "slackHardAlertOnFailure": true,
     "projectName": "xtest",
     "environmentType": "dev1",
-    "xRunnerProjectPath": "[YOUR-GIT-BASE-PATH]/xtest/tests/postman",
+    "xRunProjectPath": "[YOUR-GIT-BASE-PATH]/xtest/tests/postman",
     "suiteId": "regression"
   }
 ```
@@ -87,14 +87,14 @@ npm install
 
 ## Usage
 ```console
-$ ./xRunner.js 
+$ ./xRun.js 
 __________________________________________________________________________________________________________________________________
                                                                                                                                   
-                                                         xRunner Ver. 1.0.0
+                                                         xRun Ver. 1.0.0
 __________________________________________________________________________________________________________________________________
 
 
-   USAGE:  $ ./xRunner.js <program-command> [--settingsKey settingsValue]
+   USAGE:  $ ./xRun.js <program-command> [--settingsKey settingsValue]
 
 
           <program-command> - Required. Valid program-command values are:
@@ -113,7 +113,7 @@ ________________________________________________________________________________
 
 ## Configurations
 All available configurations with documentation and defaults can be viewed here:
-https://github.com/schwabyio/xrunner/lib/config.js
+https://github.com/schwabyio/xrun/lib/config.js
 
 Configuration Order of Precedence (lowest to highest):
 1. Default value

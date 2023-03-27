@@ -1,23 +1,58 @@
 {
-    "name": "xrunner",
-    "description": "Postman Extended Runner",
-    "homepage": "https://github.com/schwabyio/xrunner",
-    "author": "schwabyio",
-    "dependencies": {
-        "@colors/colors": "1.5.0",
-        "adm-zip": "0.5.9",
-        "async": "3.2.4",
-        "convict": "6.2.3",
-        "handlebars": "4.7.7",
-        "json5": "2.2.3",
-        "newman": "5.3.2",
-        "open": "8.4.0",
-        "rimraf": "3.0.2",
-        "uuid": "9.0.0",
-        "marked": "4.2.5",
-        "@slack/web-api": "6.8.0",
-        "escape-html": "1.0.3",
-        "prismjs": "1.29.0"
-    },
-    "version": "1.1.0"
+  "name": "@schwabyio/xrun",
+  "bin": {
+    "xrun": "./xrun.js"
+  },
+  "description": "Postman Extended Runner",
+  "homepage": "https://github.com/schwabyio/xrun",
+  "author": "schwabyio",
+  "dependencies": {
+    "@colors/colors": "1.5.0",
+    "@slack/web-api": "6.8.0",
+    "adm-zip": "0.5.9",
+    "async": "3.2.4",
+    "convict": "6.2.3",
+    "escape-html": "1.0.3",
+    "handlebars": "4.7.7",
+    "json5": "2.2.3",
+    "marked": "4.2.5",
+    "newman": "5.3.2",
+    "open": "8.4.0",
+    "prismjs": "1.29.0",
+    "rimraf": "3.0.2",
+    "uuid": "9.0.0"
+  },
+  "version": "1.2.0",
+  "main": "xrun.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "devDependencies": {
+    "jest": "^29.5.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/schwabyio/xrun.git"
+  },
+  "keywords": [
+    "testing",
+    "api",
+    "cli",
+    "continuous",
+    "integration",
+    "test-automation",
+    "postman",
+    "functional-testing",
+    "api-testing",
+    "api-automated-testing",
+    "rest",
+    "restful-testing"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/schwabyio/xrun/issues"
+  }
 }
