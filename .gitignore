@@ -9,3 +9,6 @@ test-results/
 
 # settings/settings.json
 settings/settings.json
+
+# code coverage reports
+coverage/

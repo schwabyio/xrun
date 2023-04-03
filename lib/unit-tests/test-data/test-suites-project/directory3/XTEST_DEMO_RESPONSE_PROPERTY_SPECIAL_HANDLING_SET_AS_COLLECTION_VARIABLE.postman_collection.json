@@ -1,0 +1,119 @@
+{
+	"info": {
+		"_postman_id": "637fe7a0-e5be-4723-924e-64f0f5cc0e17",
+		"name": "XTEST_DEMO_RESPONSE_PROPERTY_SPECIAL_HANDLING_SET_AS_COLLECTION_VARIABLE",
+		"description": "Objective: Set a response body property as an collection variable.\n\n``` javascript\nexpectResponseBodyToHaveProperty(jsonPath [String], collectionVariableKey [String], specialHandling [String] = \"setAsCollectionVariable\")\n\n```",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24782047"
+	},
+	"item": [
+		{
+			"name": "Set response property values as collection variables.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response body",
+							"expectResponseBodyToHaveProperty(\"string.value\", \"string-value-col-var-key\", \"setAsCollectionVariable\");",
+							"expectResponseBodyToHaveProperty(\"boolean.value\", \"boolean-value-col-var-key\", \"setAsCollectionVariable\");",
+							"expectResponseBodyToHaveProperty(\"number.value\", \"number-value-col-var-key\", \"setAsCollectionVariable\");",
+							"expectResponseBodyToHaveProperty(\"null.value\", \"null-value-col-var-key\", \"setAsCollectionVariable\");",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/responseToHaveJsonPropertiesWithAllDataTypes",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"responseToHaveJsonPropertiesWithAllDataTypes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate response property values using collection variables from above request.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response body",
+							"expectResponseBodyToHaveProperty(\"string.value\", pm.collectionVariables.get(\"string-value-col-var-key\"));",
+							"expectResponseBodyToHaveProperty(\"boolean.value\", pm.collectionVariables.get(\"boolean-value-col-var-key\"));",
+							"expectResponseBodyToHaveProperty(\"number.value\", pm.collectionVariables.get(\"number-value-col-var-key\"));",
+							"expectResponseBodyToHaveProperty(\"null.value\", pm.collectionVariables.get(\"null-value-col-var-key\"));",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/responseToHaveJsonPropertiesWithAllDataTypes",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"responseToHaveJsonPropertiesWithAllDataTypes"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "string-value-col-var-key",
+			"value": ""
+		},
+		{
+			"key": "boolean-value-col-var-key",
+			"value": ""
+		},
+		{
+			"key": "number-value-col-var-key",
+			"value": ""
+		},
+		{
+			"key": "null-value-col-var-key",
+			"value": ""
+		}
+	]
+}

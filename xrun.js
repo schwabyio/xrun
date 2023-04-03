@@ -15,7 +15,7 @@
 try {
   const xRunLib = require('./lib/xrun-lib')
 
-    //Initialize constants
+  //Initialize
   const xRun = new xRunLib()
   const programCommand = process.argv[2] || ''
 
@@ -23,14 +23,13 @@ try {
   if (! programCommand) {
     //Usage
     console.log(xRun.getUsage())
-    process.exit(1)
+    process.exit(0)
   } else {
     if (programCommand === 'g' || programCommand === 'get') {
-      xRun.getDirectoryList(function resultOfGetDirectoryList(errMsg, directoryList) {
-        if (errMsg) {
-          console.log(errMsg)
-          process.exit(1)
-        } else {
+      (async () => {
+        try {
+          let directoryList = await xRun.getDirectoryListAsync(xRun.settings)
+
           xRun.createXRunObject(directoryList, function resultOfCreateXRunObject(errMsg, xRunObject) {
             if (errMsg) {
               console.log(errMsg)
@@ -47,8 +46,11 @@ try {
               })
             }
           })
+        } catch (errMsg) {
+          console.log(errMsg)
+          process.exit(1)
         }
-      })
+      })()
     } else if (programCommand === 'a' || programCommand === 'all') {
       xRun.getDirectoryList(function resultOfGetDirectoryList(errMsg, directoryList) {
         if (errMsg) {

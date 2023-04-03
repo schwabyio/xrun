@@ -1,0 +1,101 @@
+{
+	"info": {
+		"_postman_id": "9544ae2e-1594-41b4-bdc2-a62dbac0638e",
+		"name": "XTEST_DEMO_STATUS_CODE_SPECIAL_HANDLING_SET_AS_COLLECTION_VARIABLE",
+		"description": "Objective: Set the response status code as an collection variable.\n\n``` javascript\nexpectResponseStatusCodeToBe(collectionVariableKey [String], specialHandling [String] = \"setAsCollectionVariable\")\n\n```",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24782047"
+	},
+	"item": [
+		{
+			"name": "Set status code as collection variable.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response status code",
+							"expectResponseStatusCodeToBe(\"status-code-col-var-key\", \"setAsCollectionVariable\");",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/responseStatusCode200",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"responseStatusCode200"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate status code using collection variable from above request.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response status code",
+							"expectResponseStatusCodeToBe(pm.collectionVariables.get(\"status-code-col-var-key\"));",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/responseStatusCode200",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"responseStatusCode200"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "status-code-col-var-key",
+			"value": ""
+		}
+	]
+}

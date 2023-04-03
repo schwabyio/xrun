@@ -1,0 +1,59 @@
+{
+	"info": {
+		"_postman_id": "b99e7713-ce09-4989-9b2a-8211672a0b26",
+		"name": "XTEST_DEMO_EXPECT_RESPONSE_BODY_TO_HAVE_UNORDERED_ARRAY_OF_OBJECTS_3",
+		"description": "Objective: Validate a response body with an unordered array of objects, with specialHandling \"notThisExpectedKey\" and \"notThisExpectedValue\".\n\n``` javascript\nexpectResponseBodyToHaveUnorderedArray(jsonPathToArray [String], validationList [Array of Objects]);\n\n```",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24782047"
+	},
+	"item": [
+		{
+			"name": "Validate a response body with an unordered array of objects, with specialHandling \"notThisExpectedKey\" and \"notThisExpectedValue\".",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, false);",
+							"",
+							"//Validate response body",
+							"expectResponseBodyToHaveUnorderedArray(\"account\", [",
+							"  {pathToProperty: \"id.value\", expectedValue: \"KkGHo7-dCNstHv8KT28uNzMZficQcaQwg31wIpM_uwo\"},",
+							"  {pathToProperty: \"description.notValid\", expectedValue: null, specialHandling: \"notThisExpectedKey\"},",
+							"  {pathToProperty: \"description\", expectedValue: \"wrong description\", specialHandling: \"notThisExpectedValue\"},",
+							"  {pathToProperty: \"category\", expectedValue: /WRONG CATEGORY/, specialHandling: \"notThisExpectedValue\"},",
+							"  {pathToProperty: \"balance.currentBalance.amount\", expectedValue: 4.73, specialHandling: \"notThisExpectedValue\"}",
+							"]);",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/responseToHaveJsonArrayOfAccounts1",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"responseToHaveJsonArrayOfAccounts1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

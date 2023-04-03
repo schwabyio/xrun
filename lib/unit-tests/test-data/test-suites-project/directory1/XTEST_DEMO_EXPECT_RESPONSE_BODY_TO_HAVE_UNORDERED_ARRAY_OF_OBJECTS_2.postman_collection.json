@@ -1,0 +1,207 @@
+{
+	"info": {
+		"_postman_id": "2f5d4102-f2d1-4215-9b7b-bfb7cb92b631",
+		"name": "XTEST_DEMO_EXPECT_RESPONSE_BODY_TO_HAVE_UNORDERED_ARRAY_OF_OBJECTS_2",
+		"description": "Objective: Validate a response body with an unordered array of objects, with specialHandling \"setAsCollectionVariable\".\n\n``` javascript\nexpectResponseBodyToHaveUnorderedArray(jsonPathToArray [String], validationList [Array of Objects]);\n\n```",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24782047"
+	},
+	"item": [
+		{
+			"name": "Set unordered array account ids as collection variables.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response body",
+							"expectResponseBodyToHaveUnorderedArray(\"account\", [",
+							"  {pathToProperty: \"id.value\", expectedValue: \"account-id-KkG\", specialHandling: \"setAsCollectionVariable\"},",
+							"  {pathToProperty: \"description\", expectedValue: \"Checking Account\"},",
+							"  {pathToProperty: \"displayAccountNumber\", expectedValue: \"*3221\"},",
+							"  {pathToProperty: \"accountNumber.hostValue\", expectedValue: \"7436283221\"},",
+							"  {pathToProperty: \"category\", expectedValue: \"DEPOSIT\"},",
+							"  {pathToProperty: \"accountType\", expectedValue: \"CHECKING\"},",
+							"  {pathToProperty: \"balance.currentBalance.amount\", expectedValue: 1184.73},",
+							"  {pathToProperty: \"balance.availableBalance.amount\", expectedValue: 1138.21},",
+							"  {pathToProperty: \"asOfDate\", expectedValue: -86400, specialHandling: \"dateAsEpoch\"},",
+							"  {pathToProperty: \"accountStatus\", expectedValue: \"OPEN\", specialHandling: undefined}",
+							"]);",
+							"expectResponseBodyToHaveUnorderedArray(\"account\", [",
+							"  {pathToProperty: \"id.value\", expectedValue: \"account-id-wKg\", specialHandling: \"setAsCollectionVariable\"},",
+							"  {pathToProperty: \"description\", expectedValue: \"Savings Account\"},",
+							"  {pathToProperty: \"displayAccountNumber\", expectedValue: \"*0002\"},",
+							"  {pathToProperty: \"category\", expectedValue: \"DEPOSIT\"},",
+							"  {pathToProperty: \"accountType\", expectedValue: \"SAVINGS\"},",
+							"  {pathToProperty: \"balance.currentBalance.amount\", expectedValue: 10002.73},",
+							"  {pathToProperty: \"balance.availableBalance.amount\", expectedValue: 10001.73},",
+							"  {pathToProperty: \"accountStatus\", expectedValue: \"OPEN\"}",
+							"]);",
+							"expectResponseBodyToHaveUnorderedArray(\"account\", [",
+							"  {pathToProperty: \"id.value\", expectedValue: \"account-id-blD\", specialHandling: \"setAsCollectionVariable\"},",
+							"  {pathToProperty: \"description\", expectedValue: \"401K Account\"},",
+							"  {pathToProperty: \"displayAccountNumber\", expectedValue: \"*0024\"},",
+							"  {pathToProperty: \"accountNumber.hostValue\", expectedValue: \"9900000024\"},",
+							"  {pathToProperty: \"category\", expectedValue: \"INVESTMENT\"},",
+							"  {pathToProperty: \"accountType\", expectedValue: \"RETIREMENT_401_K\"},",
+							"  {pathToProperty: \"balance.currentBalance.amount\", expectedValue: 50000},",
+							"  {pathToProperty: \"balance.availableBalance.amount\", expectedValue: 50000},",
+							"  {pathToProperty: \"asOfDate\", expectedValue: -86400, specialHandling: \"dateAsEpoch\"},",
+							"  {pathToProperty: \"accountStatus\", expectedValue: \"OPEN\", specialHandling: undefined}",
+							"]);",
+							"expectResponseBodyToHaveUnorderedArray(\"account\", [",
+							"  {pathToProperty: \"id.value\", expectedValue: \"account-id-bXX\", specialHandling: \"setAsCollectionVariable\"},",
+							"  {pathToProperty: \"description\", expectedValue: \"Certificate of Deposit Account\"},",
+							"  {pathToProperty: \"displayAccountNumber\", expectedValue: \"*0025\"},",
+							"  {pathToProperty: \"accountNumber.hostValue\", expectedValue: \"9900000025\"},",
+							"  {pathToProperty: \"category\", expectedValue: \"INVESTMENT\"},",
+							"  {pathToProperty: \"accountType\", expectedValue: \"CERT_OF_DEPOSIT\"},",
+							"  {pathToProperty: \"balance.currentBalance.amount\", expectedValue: 15000},",
+							"  {pathToProperty: \"balance.availableBalance.amount\", expectedValue: 15000},",
+							"  {pathToProperty: \"asOfDate\", expectedValue: -86400, specialHandling: \"dateAsEpoch\"},",
+							"  {pathToProperty: \"accountStatus\", expectedValue: \"OPEN\", specialHandling: undefined},",
+							"  {pathToProperty: \"interestRate\", expectedValue:  0.006},",
+							"  {pathToProperty: \"maturityDate\", expectedValue: \"2040-01-30\", specialHandling: \"dateAsEpoch\"},",
+							"]);",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/responseToHaveJsonArrayOfAccounts1",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"responseToHaveJsonArrayOfAccounts1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate account ids using collection variables from above request.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response body",
+							"expectResponseBodyToHaveUnorderedArray(\"account\", [",
+							"  {pathToProperty: \"id.value\", expectedValue: pm.collectionVariables.get(\"account-id-KkG\")},",
+							"  {pathToProperty: \"description\", expectedValue: \"Checking Account\"},",
+							"  {pathToProperty: \"displayAccountNumber\", expectedValue: \"*3221\"},",
+							"  {pathToProperty: \"accountNumber.hostValue\", expectedValue: \"7436283221\"},",
+							"  {pathToProperty: \"category\", expectedValue: \"DEPOSIT\"},",
+							"  {pathToProperty: \"accountType\", expectedValue: \"CHECKING\"},",
+							"  {pathToProperty: \"balance.currentBalance.amount\", expectedValue: 1184.73},",
+							"  {pathToProperty: \"balance.availableBalance.amount\", expectedValue: 1138.21},",
+							"  {pathToProperty: \"asOfDate\", expectedValue: -86400, specialHandling: \"dateAsEpoch\"},",
+							"  {pathToProperty: \"accountStatus\", expectedValue: \"OPEN\", specialHandling: undefined}",
+							"]);",
+							"expectResponseBodyToHaveUnorderedArray(\"account\", [",
+							"  {pathToProperty: \"id.value\", expectedValue: pm.collectionVariables.get(\"account-id-wKg\")},",
+							"  {pathToProperty: \"description\", expectedValue: \"Savings Account\"},",
+							"  {pathToProperty: \"displayAccountNumber\", expectedValue: \"*0002\"},",
+							"  {pathToProperty: \"category\", expectedValue: \"DEPOSIT\"},",
+							"  {pathToProperty: \"accountType\", expectedValue: \"SAVINGS\"},",
+							"  {pathToProperty: \"balance.currentBalance.amount\", expectedValue: 10002.73},",
+							"  {pathToProperty: \"balance.availableBalance.amount\", expectedValue: 10001.73},",
+							"  {pathToProperty: \"accountStatus\", expectedValue: \"OPEN\"}",
+							"]);",
+							"expectResponseBodyToHaveUnorderedArray(\"account\", [",
+							"  {pathToProperty: \"id.value\", expectedValue: pm.collectionVariables.get(\"account-id-blD\")},",
+							"  {pathToProperty: \"description\", expectedValue: \"401K Account\"},",
+							"  {pathToProperty: \"displayAccountNumber\", expectedValue: \"*0024\"},",
+							"  {pathToProperty: \"accountNumber.hostValue\", expectedValue: \"9900000024\"},",
+							"  {pathToProperty: \"category\", expectedValue: \"INVESTMENT\"},",
+							"  {pathToProperty: \"accountType\", expectedValue: \"RETIREMENT_401_K\"},",
+							"  {pathToProperty: \"balance.currentBalance.amount\", expectedValue: 50000},",
+							"  {pathToProperty: \"balance.availableBalance.amount\", expectedValue: 50000},",
+							"  {pathToProperty: \"asOfDate\", expectedValue: -86400, specialHandling: \"dateAsEpoch\"},",
+							"  {pathToProperty: \"accountStatus\", expectedValue: \"OPEN\", specialHandling: undefined}",
+							"]);",
+							"expectResponseBodyToHaveUnorderedArray(\"account\", [",
+							"  {pathToProperty: \"id.value\", expectedValue: pm.collectionVariables.get(\"account-id-bXX\")},",
+							"  {pathToProperty: \"description\", expectedValue: \"Certificate of Deposit Account\"},",
+							"  {pathToProperty: \"displayAccountNumber\", expectedValue: \"*0025\"},",
+							"  {pathToProperty: \"accountNumber.hostValue\", expectedValue: \"9900000025\"},",
+							"  {pathToProperty: \"category\", expectedValue: \"INVESTMENT\"},",
+							"  {pathToProperty: \"accountType\", expectedValue: \"CERT_OF_DEPOSIT\"},",
+							"  {pathToProperty: \"balance.currentBalance.amount\", expectedValue: 15000},",
+							"  {pathToProperty: \"balance.availableBalance.amount\", expectedValue: 15000},",
+							"  {pathToProperty: \"asOfDate\", expectedValue: -86400, specialHandling: \"dateAsEpoch\"},",
+							"  {pathToProperty: \"accountStatus\", expectedValue: \"OPEN\", specialHandling: undefined},",
+							"  {pathToProperty: \"interestRate\", expectedValue:  0.006},",
+							"  {pathToProperty: \"maturityDate\", expectedValue: \"2040-01-30\", specialHandling: \"dateAsEpoch\"},",
+							"]);",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/responseToHaveJsonArrayOfAccounts1",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"responseToHaveJsonArrayOfAccounts1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "account-id-KkG",
+			"value": ""
+		},
+		{
+			"key": "account-id-wKg",
+			"value": ""
+		},
+		{
+			"key": "account-id-blD",
+			"value": ""
+		},
+		{
+			"key": "account-id-bXX",
+			"value": ""
+		}
+	]
+}
