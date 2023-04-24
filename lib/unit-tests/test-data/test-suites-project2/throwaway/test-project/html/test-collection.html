@@ -1,0 +1,987 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>xRun Collection Results</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+  <!-- Bootstrap JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+  <!-- Prism (code highlighter) JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <style>
+
+    :root {
+      --main-passed-color: #87EA67;
+      --main-failed-color: #F50F55;
+      --main-header-background-color: #393D47;
+    }
+
+    .text-color-passed {
+      color: var(--main-passed-color)
+    }
+
+    .text-color-failed {
+      color: var(--main-failed-color)
+    }
+
+    .accordion-button:not(.collapsed) {
+      background-color: var(--main-header-background-color)
+    }
+
+    .accordion-button-passed:not(.collapsed)::after {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2387EA67' class='bi bi-check-square-fill' viewBox='0 0 16 16'%3E%3Cpath d='M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm10.03 4.97a.75.75 0 0 1 .011 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.75.75 0 0 1 1.08-.022z'/%3E%3C/svg%3E");
+      transform: none !important;
+    }
+
+    .accordion-button-passed.collapsed::after {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2387EA67' class='bi bi-check-square-fill' viewBox='0 0 16 16'%3E%3Cpath d='M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm10.03 4.97a.75.75 0 0 1 .011 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.75.75 0 0 1 1.08-.022z'/%3E%3C/svg%3E");
+      transform: none !important;
+    }
+
+    .accordion-button-failed:not(.collapsed)::after {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23EC4B7C' class='bi bi-exclamation-square-fill' viewBox='0 0 16 16'%3E%3Cpath d='M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z'/%3E%3C/svg%3E");
+      transform: none !important;
+    }
+
+    .accordion-button-failed.collapsed::after {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23EC4B7C' class='bi bi-exclamation-square-fill' viewBox='0 0 16 16'%3E%3Cpath d='M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z'/%3E%3C/svg%3E");
+      transform: none !important;
+    }
+
+    .maxHeight {
+      height: 200px;
+    }
+  </style>
+
+  <!-- Prism - One Dark CSS Theme -->
+  <style>
+    code[class*="language-"],pre[class*="language-"]{background:hsl(220,13%,18%);color:hsl(220,14%,71%);text-shadow:0 1px rgba(0,0,0,0.3);font-family:"Fira Code","Fira Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace;direction:ltr;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;line-height:1.5;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}code[class*="language-"]::-moz-selection,code[class*="language-"] *::-moz-selection,pre[class*="language-"] *::-moz-selection{background:hsl(220,13%,28%);color:inherit;text-shadow:none}code[class*="language-"]::selection,code[class*="language-"] *::selection,pre[class*="language-"] *::selection{background:hsl(220,13%,28%);color:inherit;text-shadow:none}pre[class*="language-"]{padding:1em;margin:.5em 0;overflow:auto;border-radius:.3em}:not(pre)>code[class*="language-"]{padding:.2em .3em;border-radius:.3em;white-space:normal}@media print{code[class*="language-"],pre[class*="language-"]{text-shadow:none}}.token.comment,.token.prolog,.token.cdata{color:hsl(220,10%,40%)}.token.doctype,.token.punctuation,.token.entity{color:hsl(220,14%,71%)}.token.attr-name,.token.class-name,.token.boolean,.token.constant,.token.number,.token.atrule{color:hsl(29,54%,61%)}.token.keyword{color:hsl(286,60%,67%)}.token.property,.token.tag,.token.symbol,.token.deleted,.token.important{color:hsl(355,65%,65%)}.token.selector,.token.string,.token.char,.token.builtin,.token.inserted,.token.regex,.token.attr-value,.token.attr-value>.token.punctuation{color:hsl(95,38%,62%)}.token.variable,.token.operator,.token.function{color:hsl(207,82%,66%)}.token.url{color:hsl(187,47%,55%)}.token.attr-value>.token.punctuation.attr-equals,.token.special-attr>.token.attr-value>.token.value.css{color:hsl(220,14%,71%)}.language-css .token.selector{color:hsl(355,65%,65%)}.language-css .token.property{color:hsl(220,14%,71%)}.language-css .token.function,.language-css .token.url>.token.function{color:hsl(187,47%,55%)}.language-css .token.url>.token.string.url{color:hsl(95,38%,62%)}.language-css .token.important,.language-css .token.atrule .token.rule{color:hsl(286,60%,67%)}.language-javascript .token.operator{color:hsl(286,60%,67%)}.language-javascript .token.template-string>.token.interpolation>.token.interpolation-punctuation.punctuation{color:hsl(5,48%,51%)}.language-json .token.operator{color:hsl(220,14%,71%)}.language-json .token.null.keyword{color:hsl(29,54%,61%)}.language-markdown .token.url,.language-markdown .token.url>.token.operator,.language-markdown .token.url-reference.url>.token.string{color:hsl(220,14%,71%)}.language-markdown .token.url>.token.content{color:hsl(207,82%,66%)}.language-markdown .token.url>.token.url,.language-markdown .token.url-reference.url{color:hsl(187,47%,55%)}.language-markdown .token.blockquote.punctuation,.language-markdown .token.hr.punctuation{color:hsl(220,10%,40%);font-style:italic}.language-markdown .token.code-snippet{color:hsl(95,38%,62%)}.language-markdown .token.bold .token.content{color:hsl(29,54%,61%)}.language-markdown .token.italic .token.content{color:hsl(286,60%,67%)}.language-markdown .token.strike .token.content,.language-markdown .token.strike .token.punctuation,.language-markdown .token.list.punctuation,.language-markdown .token.title.important>.token.punctuation{color:hsl(355,65%,65%)}.token.bold{font-weight:bold}.token.comment,.token.italic{font-style:italic}.token.entity{cursor:help}.token.namespace{opacity:.8}.token.token.tab:not(:empty):before,.token.token.cr:before,.token.token.lf:before,.token.token.space:before{color:hsla(220,14%,71%,0.15);text-shadow:none}div.code-toolbar>.toolbar.toolbar>.toolbar-item{margin-right:.4em}div.code-toolbar>.toolbar.toolbar>.toolbar-item>button,div.code-toolbar>.toolbar.toolbar>.toolbar-item>a,div.code-toolbar>.toolbar.toolbar>.toolbar-item>span{background:hsl(220,13%,26%);color:hsl(220,9%,55%);padding:.1em .4em;border-radius:.3em}div.code-toolbar>.toolbar.toolbar>.toolbar-item>button:hover,div.code-toolbar>.toolbar.toolbar>.toolbar-item>button:focus,div.code-toolbar>.toolbar.toolbar>.toolbar-item>a:hover,div.code-toolbar>.toolbar.toolbar>.toolbar-item>a:focus,div.code-toolbar>.toolbar.toolbar>.toolbar-item>span:hover,div.code-toolbar>.toolbar.toolbar>.toolbar-item>span:focus{background:hsl(220,13%,28%);color:hsl(220,14%,71%)}.line-highlight.line-highlight{background:hsla(220,100%,80%,0.04)}.line-highlight.line-highlight:before,.line-highlight.line-highlight[data-end]:after{background:hsl(220,13%,26%);color:hsl(220,14%,71%);padding:.1em .6em;border-radius:.3em;box-shadow:0 2px 0 0 rgba(0,0,0,0.2)}pre[id].linkable-line-numbers.linkable-line-numbers span.line-numbers-rows>span:hover:before{background-color:hsla(220,100%,80%,0.04)}.line-numbers.line-numbers .line-numbers-rows,.command-line .command-line-prompt{border-right-color:hsla(220,14%,71%,0.15)}.line-numbers .line-numbers-rows>span:before,.command-line .command-line-prompt>span:before{color:hsl(220,14%,45%)}.rainbow-braces .token.token.punctuation.brace-level-1,.rainbow-braces .token.token.punctuation.brace-level-5,.rainbow-braces .token.token.punctuation.brace-level-9{color:hsl(355,65%,65%)}.rainbow-braces .token.token.punctuation.brace-level-2,.rainbow-braces .token.token.punctuation.brace-level-6,.rainbow-braces .token.token.punctuation.brace-level-10{color:hsl(95,38%,62%)}.rainbow-braces .token.token.punctuation.brace-level-3,.rainbow-braces .token.token.punctuation.brace-level-7,.rainbow-braces .token.token.punctuation.brace-level-11{color:hsl(207,82%,66%)}.rainbow-braces .token.token.punctuation.brace-level-4,.rainbow-braces .token.token.punctuation.brace-level-8,.rainbow-braces .token.token.punctuation.brace-level-12{color:hsl(286,60%,67%)}pre.diff-highlight>code .token.token.deleted:not(.prefix),pre>code.diff-highlight .token.token.deleted:not(.prefix){background-color:hsla(353,100%,66%,0.15)}pre.diff-highlight>code .token.token.deleted:not(.prefix)::-moz-selection,pre.diff-highlight>code .token.token.deleted:not(.prefix) *::-moz-selection,pre>code.diff-highlight .token.token.deleted:not(.prefix)::-moz-selection,pre>code.diff-highlight .token.token.deleted:not(.prefix) *::-moz-selection{background-color:hsla(353,95%,66%,0.25)}pre.diff-highlight>code .token.token.deleted:not(.prefix)::selection,pre.diff-highlight>code .token.token.deleted:not(.prefix) *::selection,pre>code.diff-highlight .token.token.deleted:not(.prefix)::selection,pre>code.diff-highlight .token.token.deleted:not(.prefix) *::selection{background-color:hsla(353,95%,66%,0.25)}pre.diff-highlight>code .token.token.inserted:not(.prefix),pre>code.diff-highlight .token.token.inserted:not(.prefix){background-color:hsla(137,100%,55%,0.15)}pre.diff-highlight>code .token.token.inserted:not(.prefix)::-moz-selection,pre.diff-highlight>code .token.token.inserted:not(.prefix) *::-moz-selection,pre>code.diff-highlight .token.token.inserted:not(.prefix)::-moz-selection,pre>code.diff-highlight .token.token.inserted:not(.prefix) *::-moz-selection{background-color:hsla(135,73%,55%,0.25)}pre.diff-highlight>code .token.token.inserted:not(.prefix)::selection,pre.diff-highlight>code .token.token.inserted:not(.prefix) *::selection,pre>code.diff-highlight .token.token.inserted:not(.prefix)::selection,pre>code.diff-highlight .token.token.inserted:not(.prefix) *::selection{background-color:hsla(135,73%,55%,0.25)}.prism-previewer.prism-previewer:before,.prism-previewer-gradient.prism-previewer-gradient div{border-color:hsl(224,13%,17%)}.prism-previewer-color.prism-previewer-color:before,.prism-previewer-gradient.prism-previewer-gradient div,.prism-previewer-easing.prism-previewer-easing:before{border-radius:.3em}.prism-previewer.prism-previewer:after{border-top-color:hsl(224,13%,17%)}.prism-previewer-flipped.prism-previewer-flipped.after{border-bottom-color:hsl(224,13%,17%)}.prism-previewer-angle.prism-previewer-angle:before,.prism-previewer-time.prism-previewer-time:before,.prism-previewer-easing.prism-previewer-easing{background:hsl(219,13%,22%)}.prism-previewer-angle.prism-previewer-angle circle,.prism-previewer-time.prism-previewer-time circle{stroke:hsl(220,14%,71%);stroke-opacity:1}.prism-previewer-easing.prism-previewer-easing circle,.prism-previewer-easing.prism-previewer-easing path,.prism-previewer-easing.prism-previewer-easing line{stroke:hsl(220,14%,71%)}.prism-previewer-easing.prism-previewer-easing circle{fill:transparent}
+  </style>
+
+  <script>
+    function updateButtonText(buttonId, buttonType, suffixText) {
+      var buttonText = "";
+      const expanded = document.getElementById(buttonId).getAttribute('aria-expanded')
+      
+      if (expanded === "true") {
+        if (buttonType === "hide") {
+          buttonText = "Hide " + suffixText
+        } else if (buttonType === "expand") {
+          buttonText = "Collapse " + suffixText;
+        }
+      } else {
+        if (buttonType === "hide") {
+          buttonText = "Show " + suffixText
+        } else if (buttonType === "expand") {
+          buttonText = "Expand " + suffixText
+        }
+      }
+
+      document.getElementById(buttonId).textContent = buttonText
+    }
+
+
+    function toggleAccordion(buttonId, buttonType, suffixText) {
+      const accordionItems = document.getElementsByClassName('accordion-collapse')
+      const buttonElement = document.getElementById(buttonId)
+      const expanded = buttonElement.getAttribute('aria-expanded')
+
+      if (expanded === "true") {
+        buttonText = "Expand " + suffixText
+        buttonElement.setAttribute('aria-expanded', "false")
+      } else {
+        buttonText = "Collapse " + suffixText
+        buttonElement.setAttribute('aria-expanded', "true")
+      }
+
+      buttonElement.textContent = buttonText
+
+      Object.values(accordionItems).forEach(function (item, index) {
+
+        const bsAccordion = new bootstrap.Collapse(item, {
+          toggle: false
+        })
+          
+          if (expanded === "true") {
+            bsAccordion.hide()
+          } else {
+            bsAccordion.show()
+          }
+        })
+    }
+  </script>
+</head>
+<body>
+  
+  <br>
+  <br>
+
+  <div class="container text-center">
+    <h2>xRun Collection Results</h2>
+  </div>
+ 
+  <br>
+
+  <div class="container">
+    <div class="card">
+      <div class="card-header">Results Overview</div>
+      <div class="card-body">
+        <div class="grid text-start">
+
+          <div class="container">
+            <div class="row mb-3">
+              <div class="col-2">Collection Name</div>
+              <div class="col border rounded">XTEST_DEMO_DATE</div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-2">Collection Description</div>
+              <div class="col border rounded"><p><strong>Objective: Validate the date() function in the following places:</strong></p>
+<ul>
+<li>response body</li>
+<li>response header</li>
+<li>request url</li>
+<li>request header</li>
+<li>request body</li>
+</ul>
+<pre><code class="language-javascript">date(dateFormat [String], secondsOffset [Number format: +-offsetInSeconds], timeZoneScheme [String]);
+</code></pre>
+<p>This function can be used to dynamically generate a date/time value in any required format. <a href="https://github.com/samsonjs/strftime/blob/master/Readme.md#supported-specifiers">See here for supported dateFormat specifiers.</a></p>
+</div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-2">Time of Run</div>
+              <div class="col-auto border rounded">Tue, April 18, 2023 at 8:37:01 AM Pacific Daylight Time</div>
+            </div>            
+          </div>
+
+
+          <div class="card">
+              <table class="table table-borderless text-center">
+                <tbody>
+                    <tr class="bg-body-tertiary">
+                      <td scope="col">Collection Run Time</td>
+                      <td scope="col">Total Tests</td>
+                      <td scope="col">Tests Passed</td>
+                      <td scope="col">Tests Failed</td>
+                      <td scope="col">Total Assertions</td>
+                      <td scope="col">Assertions Passed</td>
+                      <td scope="col">Assertions Failed</td>
+                      <td scope="col">Overall Result</td>
+                    </tr>
+                  <tr class="border-top">
+                    <td>0.605s</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>0</td>
+                    <td>11</td>
+                    <td>11</td>
+                    <td>0</td>
+                    <td>
+                        <div class="text-color-passed">PASSED</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+
+        </div>
+      </div>
+    </div>    
+  </div>
+
+
+  <br>
+  <br>
+  <br>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-2 text-start">
+        <h3>Tests</h3>
+      </div>
+
+      <div class="col text-end">
+          <button class="btn btn-outline-secondary" id="button-toggle-passed" onclick="updateButtonText('button-toggle-passed', 'hide', 'Passed')" type="button" data-bs-toggle="collapse" data-bs-target=".passed" aria-pressed="true" aria-expanded="true">Hide Passed</button>
+
+
+        <button class="btn btn-outline-secondary" id="button-toggle-collapse" onclick="toggleAccordion('button-toggle-collapse', 'expand', 'All')" type="button" aria-expanded="true">Collapse All</button>
+      </div>
+
+    </div>
+
+      <div class="accordion" id="accordion-steps">
+          
+  <div class="accordion-item passed show">
+    
+    <h2 class="accordion-header" id="heading-1">
+      <button class="accordion-button accordion-button-passed" type="button" data-bs-toggle="collapse" data-bs-target="#step-1" aria-expanded="true" aria-controls="step-1">Test 1: Validate dynamic date in response body using xtest date() function.</button>
+    </h2>
+    
+    <div id="step-1" class="accordion-collapse collapse show" aria-labelledby="heading-1">
+      <div class="accordion-body">
+        
+
+          <div class="card">
+            <div class="card-header">Request</div>
+            <div class="card-body">
+              
+              <div class="grid text-start">
+                <div class="row mb-3">
+                  <div class="col-2">Request Method</div>
+                  <div class="col-auto border rounded">GET</div>
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col-2">Request URL</div>
+                  <div class="col border rounded">https://xtest-demo.httpsim.schwaby.io/date1</div>
+                </div>
+
+                <div class="row mb-3 overflow-hidden maxHeight">
+                  <div class="col-2">Request Headers</div>
+                  <div class="col overflow-auto border rounded maxHeight"><pre><span class="token key attr-name">User-Agent</span><span class="token punctuation">:</span> <span class="token value attr-value">PostmanRuntime/7.29.0</span>
+<span class="token key attr-name">Accept</span><span class="token punctuation">:</span> <span class="token value attr-value">*/*</span>
+<span class="token key attr-name">Cache-Control</span><span class="token punctuation">:</span> <span class="token value attr-value">no-cache</span>
+<span class="token key attr-name">Postman-Token</span><span class="token punctuation">:</span> <span class="token value attr-value">aed4898b-d390-4f30-a9d8-fc0080786086</span>
+<span class="token key attr-name">Host</span><span class="token punctuation">:</span> <span class="token value attr-value">xtest-demo.httpsim.schwaby.io</span>
+<span class="token key attr-name">Accept-Encoding</span><span class="token punctuation">:</span> <span class="token value attr-value">gzip, deflate, br</span>
+<span class="token key attr-name">Connection</span><span class="token punctuation">:</span> <span class="token value attr-value">keep-alive</span>
+</pre></div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+
+        <br>
+
+
+          <div class="card">
+            <div class="card-header">Response</div>
+            <div class="card-body">
+
+              <div class="grid text-start">
+                <div class="row mb-3">
+                  <div class="col-2">Response Code</div>
+                  <div class="col-auto border rounded">200 OK</div>
+                </div>
+
+                <div class="row mb-3 overflow-hidden maxHeight">
+                  <div class="col-2">Response Headers</div>
+                  <div class="col overflow-auto border rounded maxHeight"><pre><span class="token key attr-name">Date</span><span class="token punctuation">:</span> <span class="token value attr-value">Tue, 18 Apr 2023 15:37:00 GMT</span>
+<span class="token key attr-name">Content-Type</span><span class="token punctuation">:</span> <span class="token value attr-value">application/json</span>
+<span class="token key attr-name">Transfer-Encoding</span><span class="token punctuation">:</span> <span class="token value attr-value">chunked</span>
+<span class="token key attr-name">Connection</span><span class="token punctuation">:</span> <span class="token value attr-value">keep-alive</span>
+<span class="token key attr-name">via</span><span class="token punctuation">:</span> <span class="token value attr-value">1.1 google</span>
+<span class="token key attr-name">CF-Cache-Status</span><span class="token punctuation">:</span> <span class="token value attr-value">DYNAMIC</span>
+<span class="token key attr-name">Report-To</span><span class="token punctuation">:</span> <span class="token value attr-value">{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=xpa%2BhsDpKhb%2BmjoQsbfWQPg9cDFwMazFEv1gN8WOr9A6kXJNauhjCT2LBt0opDQF0aJlNXCH3TD4PD2wV8sxz%2FnXR4ZDZkOztzrZbE0PGLl6j54wSM4Ulv8F1r9HzTjHreu9wvwKkbTcc3ZQiz93cA%3D%3D"}],"group":"cf-nel","max_age":604800}</span>
+<span class="token key attr-name">NEL</span><span class="token punctuation">:</span> <span class="token value attr-value">{"success_fraction":0,"report_to":"cf-nel","max_age":604800}</span>
+<span class="token key attr-name">Server</span><span class="token punctuation">:</span> <span class="token value attr-value">cloudflare</span>
+<span class="token key attr-name">CF-RAY</span><span class="token punctuation">:</span> <span class="token value attr-value">7b9dfc930b71faf4-SJC</span>
+<span class="token key attr-name">Content-Encoding</span><span class="token punctuation">:</span> <span class="token value attr-value">br</span>
+<span class="token key attr-name">alt-svc</span><span class="token punctuation">:</span> <span class="token value attr-value">h3=":443"; ma=86400, h3-29=":443"; ma=86400</span>
+</pre></div>
+                </div>
+
+                    <div class="row mb-3 overflow-hidden maxHeight">
+                      <div class="col-2">Response Body</div>
+                      <div class="col overflow-auto border rounded maxHeight"><pre><span class="token punctuation">{</span>
+    <span class="token property">"date10DaysInFutureInFormatYYYYMMDD"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"date"</span><span class="token operator">:</span> <span class="token string">"20230428"</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></pre></div>
+                    </div>
+
+                <div class="row mb-3">
+                  <div class="col-2">Response Time</div>
+                  <div class="col-auto border rounded">229ms</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+        
+        <br>
+          <div class="card">
+            <div class="card-header">Assertions</div>
+            <div class="card-body">
+              <div class="grid">
+
+                <div class="card w-50 mx-auto">
+                  <table class="table table-borderless text-center">
+                    <tbody>
+                        <tr class="bg-body-tertiary">
+                          <td scope="col">Total Assertions</td>
+                          <td scope="col">Assertions Passed</td>
+                          <td scope="col">Assertions Failed</td>
+                        </tr>
+                      <tr class="border-top">
+                        <td>2</td>
+                        <td>2</td>
+                        <td>0</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <br>
+
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="row">
+                        <div class="col text-start">Detail</div>
+                        <div class="col text-end">Result</div>
+                      </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                          <div class="col text-start">RESPONSE BODY - RESULT PASS: Property 'date10DaysInFutureInFormatYYYYMMDD.date' with expectedValue '20230428' matched actualValue '20230428'.</div>
+                            <div class="text-color-passed col-1 text-end">PASSED</div>
+                        </div>
+                        <div class="row">
+                          <div class="col text-start">STRICT RESPONSE VALIDATION - RESULT PASS: All response json body items have been properly validated.</div>
+                            <div class="text-color-passed col-1 text-end">PASSED</div>
+                        </div>
+                    </div>
+                  </div>
+
+              </div>
+            </div>
+          </div>
+
+      </div>
+    </div>
+
+  </div>
+
+          
+  <div class="accordion-item passed show">
+    
+    <h2 class="accordion-header" id="heading-2">
+      <button class="accordion-button accordion-button-passed" type="button" data-bs-toggle="collapse" data-bs-target="#step-2" aria-expanded="true" aria-controls="step-2">Test 2: Validate dynamic date in response header using xtest date() function.</button>
+    </h2>
+    
+    <div id="step-2" class="accordion-collapse collapse show" aria-labelledby="heading-2">
+      <div class="accordion-body">
+        
+
+          <div class="card">
+            <div class="card-header">Request</div>
+            <div class="card-body">
+              
+              <div class="grid text-start">
+                <div class="row mb-3">
+                  <div class="col-2">Request Method</div>
+                  <div class="col-auto border rounded">GET</div>
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col-2">Request URL</div>
+                  <div class="col border rounded">https://xtest-demo.httpsim.schwaby.io/date4</div>
+                </div>
+
+                <div class="row mb-3 overflow-hidden maxHeight">
+                  <div class="col-2">Request Headers</div>
+                  <div class="col overflow-auto border rounded maxHeight"><pre><span class="token key attr-name">User-Agent</span><span class="token punctuation">:</span> <span class="token value attr-value">PostmanRuntime/7.29.0</span>
+<span class="token key attr-name">Accept</span><span class="token punctuation">:</span> <span class="token value attr-value">*/*</span>
+<span class="token key attr-name">Cache-Control</span><span class="token punctuation">:</span> <span class="token value attr-value">no-cache</span>
+<span class="token key attr-name">Postman-Token</span><span class="token punctuation">:</span> <span class="token value attr-value">7dc2df11-2398-4dd1-a7d3-2b0601a1e552</span>
+<span class="token key attr-name">Host</span><span class="token punctuation">:</span> <span class="token value attr-value">xtest-demo.httpsim.schwaby.io</span>
+<span class="token key attr-name">Accept-Encoding</span><span class="token punctuation">:</span> <span class="token value attr-value">gzip, deflate, br</span>
+<span class="token key attr-name">Connection</span><span class="token punctuation">:</span> <span class="token value attr-value">keep-alive</span>
+</pre></div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+
+        <br>
+
+
+          <div class="card">
+            <div class="card-header">Response</div>
+            <div class="card-body">
+
+              <div class="grid text-start">
+                <div class="row mb-3">
+                  <div class="col-2">Response Code</div>
+                  <div class="col-auto border rounded">200 OK</div>
+                </div>
+
+                <div class="row mb-3 overflow-hidden maxHeight">
+                  <div class="col-2">Response Headers</div>
+                  <div class="col overflow-auto border rounded maxHeight"><pre><span class="token key attr-name">Date</span><span class="token punctuation">:</span> <span class="token value attr-value">Tue, 18 Apr 2023 15:37:00 GMT</span>
+<span class="token key attr-name">Content-Type</span><span class="token punctuation">:</span> <span class="token value attr-value">application/json</span>
+<span class="token key attr-name">Transfer-Encoding</span><span class="token punctuation">:</span> <span class="token value attr-value">chunked</span>
+<span class="token key attr-name">Connection</span><span class="token punctuation">:</span> <span class="token value attr-value">keep-alive</span>
+<span class="token key attr-name">custom-header-date</span><span class="token punctuation">:</span> <span class="token value attr-value">20230428</span>
+<span class="token key attr-name">via</span><span class="token punctuation">:</span> <span class="token value attr-value">1.1 google</span>
+<span class="token key attr-name">CF-Cache-Status</span><span class="token punctuation">:</span> <span class="token value attr-value">DYNAMIC</span>
+<span class="token key attr-name">Report-To</span><span class="token punctuation">:</span> <span class="token value attr-value">{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=HWaD%2Bwlq8UL7gLgpxrm1v4%2Brl5KkF4oseHYPMzMOmq71e4r%2BtWqb71fzAKlYLUOY8YwqO8K3ZY6d2m%2Fu9dxVNgp8X78wUmDGAYuIs1%2FUJd34WoivIaDdQ8PIHr3AnIqjrnRe6GiJxVYDmYDoaK9XKQ%3D%3D"}],"group":"cf-nel","max_age":604800}</span>
+<span class="token key attr-name">NEL</span><span class="token punctuation">:</span> <span class="token value attr-value">{"success_fraction":0,"report_to":"cf-nel","max_age":604800}</span>
+<span class="token key attr-name">Server</span><span class="token punctuation">:</span> <span class="token value attr-value">cloudflare</span>
+<span class="token key attr-name">CF-RAY</span><span class="token punctuation">:</span> <span class="token value attr-value">7b9dfc93ccf0faf4-SJC</span>
+<span class="token key attr-name">Content-Encoding</span><span class="token punctuation">:</span> <span class="token value attr-value">br</span>
+<span class="token key attr-name">alt-svc</span><span class="token punctuation">:</span> <span class="token value attr-value">h3=":443"; ma=86400, h3-29=":443"; ma=86400</span>
+</pre></div>
+                </div>
+
+                    <div class="row mb-3 overflow-hidden maxHeight">
+                      <div class="col-2">Response Body</div>
+                      <div class="col overflow-auto border rounded maxHeight"><pre><span class="token punctuation">{</span>
+    <span class="token property">"status"</span><span class="token operator">:</span> <span class="token string">"ok"</span>
+<span class="token punctuation">}</span></pre></div>
+                    </div>
+
+                <div class="row mb-3">
+                  <div class="col-2">Response Time</div>
+                  <div class="col-auto border rounded">58ms</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+        
+        <br>
+          <div class="card">
+            <div class="card-header">Assertions</div>
+            <div class="card-body">
+              <div class="grid">
+
+                <div class="card w-50 mx-auto">
+                  <table class="table table-borderless text-center">
+                    <tbody>
+                        <tr class="bg-body-tertiary">
+                          <td scope="col">Total Assertions</td>
+                          <td scope="col">Assertions Passed</td>
+                          <td scope="col">Assertions Failed</td>
+                        </tr>
+                      <tr class="border-top">
+                        <td>3</td>
+                        <td>3</td>
+                        <td>0</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <br>
+
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="row">
+                        <div class="col text-start">Detail</div>
+                        <div class="col text-end">Result</div>
+                      </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                          <div class="col text-start">RESPONSE HEADER - RESULT PASS: The expectedHeaderKey 'custom-header-date' and expectedHeaderValue '20230428' matched an actual response header key and value.</div>
+                            <div class="text-color-passed col-1 text-end">PASSED</div>
+                        </div>
+                        <div class="row">
+                          <div class="col text-start">RESPONSE BODY - RESULT PASS: Property 'status' with expectedValue 'ok' matched actualValue 'ok'.</div>
+                            <div class="text-color-passed col-1 text-end">PASSED</div>
+                        </div>
+                        <div class="row">
+                          <div class="col text-start">STRICT RESPONSE VALIDATION - RESULT PASS: All response json body items have been properly validated.</div>
+                            <div class="text-color-passed col-1 text-end">PASSED</div>
+                        </div>
+                    </div>
+                  </div>
+
+              </div>
+            </div>
+          </div>
+
+      </div>
+    </div>
+
+  </div>
+
+          
+  <div class="accordion-item passed show">
+    
+    <h2 class="accordion-header" id="heading-3">
+      <button class="accordion-button accordion-button-passed" type="button" data-bs-toggle="collapse" data-bs-target="#step-3" aria-expanded="true" aria-controls="step-3">Test 3: Send dynamic date in url using xtest date() function (see "Pre-request Script").</button>
+    </h2>
+    
+    <div id="step-3" class="accordion-collapse collapse show" aria-labelledby="heading-3">
+      <div class="accordion-body">
+        
+
+          <div class="card">
+            <div class="card-header">Request</div>
+            <div class="card-body">
+              
+              <div class="grid text-start">
+                <div class="row mb-3">
+                  <div class="col-2">Request Method</div>
+                  <div class="col-auto border rounded">GET</div>
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col-2">Request URL</div>
+                  <div class="col border rounded">https://xtest-demo.httpsim.schwaby.io/date2?date=2023-04-18</div>
+                </div>
+
+                <div class="row mb-3 overflow-hidden maxHeight">
+                  <div class="col-2">Request Headers</div>
+                  <div class="col overflow-auto border rounded maxHeight"><pre><span class="token key attr-name">User-Agent</span><span class="token punctuation">:</span> <span class="token value attr-value">PostmanRuntime/7.29.0</span>
+<span class="token key attr-name">Accept</span><span class="token punctuation">:</span> <span class="token value attr-value">*/*</span>
+<span class="token key attr-name">Cache-Control</span><span class="token punctuation">:</span> <span class="token value attr-value">no-cache</span>
+<span class="token key attr-name">Postman-Token</span><span class="token punctuation">:</span> <span class="token value attr-value">75a93cec-6c57-4edd-99bb-756fed63a43c</span>
+<span class="token key attr-name">Host</span><span class="token punctuation">:</span> <span class="token value attr-value">xtest-demo.httpsim.schwaby.io</span>
+<span class="token key attr-name">Accept-Encoding</span><span class="token punctuation">:</span> <span class="token value attr-value">gzip, deflate, br</span>
+<span class="token key attr-name">Connection</span><span class="token punctuation">:</span> <span class="token value attr-value">keep-alive</span>
+</pre></div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+
+        <br>
+
+
+          <div class="card">
+            <div class="card-header">Response</div>
+            <div class="card-body">
+
+              <div class="grid text-start">
+                <div class="row mb-3">
+                  <div class="col-2">Response Code</div>
+                  <div class="col-auto border rounded">200 OK</div>
+                </div>
+
+                <div class="row mb-3 overflow-hidden maxHeight">
+                  <div class="col-2">Response Headers</div>
+                  <div class="col overflow-auto border rounded maxHeight"><pre><span class="token key attr-name">Date</span><span class="token punctuation">:</span> <span class="token value attr-value">Tue, 18 Apr 2023 15:37:00 GMT</span>
+<span class="token key attr-name">Content-Type</span><span class="token punctuation">:</span> <span class="token value attr-value">application/json</span>
+<span class="token key attr-name">Transfer-Encoding</span><span class="token punctuation">:</span> <span class="token value attr-value">chunked</span>
+<span class="token key attr-name">Connection</span><span class="token punctuation">:</span> <span class="token value attr-value">keep-alive</span>
+<span class="token key attr-name">via</span><span class="token punctuation">:</span> <span class="token value attr-value">1.1 google</span>
+<span class="token key attr-name">CF-Cache-Status</span><span class="token punctuation">:</span> <span class="token value attr-value">DYNAMIC</span>
+<span class="token key attr-name">Report-To</span><span class="token punctuation">:</span> <span class="token value attr-value">{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=VxoxMC8shOi8ylq7fG%2B1qtcdSdv9MhCaHGDptSta4fRMxDqk6N%2FFM8McdxQn9e9sc6rfSnMHwFzlA9a%2B64qJXTl98VoaOX1TAJk%2BzDYJaiKDj3MZFQuEpz%2F%2FaF%2BrEGkACzZMksYDZLwB2IQTA5elVw%3D%3D"}],"group":"cf-nel","max_age":604800}</span>
+<span class="token key attr-name">NEL</span><span class="token punctuation">:</span> <span class="token value attr-value">{"success_fraction":0,"report_to":"cf-nel","max_age":604800}</span>
+<span class="token key attr-name">Server</span><span class="token punctuation">:</span> <span class="token value attr-value">cloudflare</span>
+<span class="token key attr-name">CF-RAY</span><span class="token punctuation">:</span> <span class="token value attr-value">7b9dfc945dddfaf4-SJC</span>
+<span class="token key attr-name">Content-Encoding</span><span class="token punctuation">:</span> <span class="token value attr-value">br</span>
+<span class="token key attr-name">alt-svc</span><span class="token punctuation">:</span> <span class="token value attr-value">h3=":443"; ma=86400, h3-29=":443"; ma=86400</span>
+</pre></div>
+                </div>
+
+                    <div class="row mb-3 overflow-hidden maxHeight">
+                      <div class="col-2">Response Body</div>
+                      <div class="col overflow-auto border rounded maxHeight"><pre><span class="token punctuation">{</span>
+    <span class="token property">"status"</span><span class="token operator">:</span> <span class="token string">"ok"</span>
+<span class="token punctuation">}</span></pre></div>
+                    </div>
+
+                <div class="row mb-3">
+                  <div class="col-2">Response Time</div>
+                  <div class="col-auto border rounded">53ms</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+        
+        <br>
+          <div class="card">
+            <div class="card-header">Assertions</div>
+            <div class="card-body">
+              <div class="grid">
+
+                <div class="card w-50 mx-auto">
+                  <table class="table table-borderless text-center">
+                    <tbody>
+                        <tr class="bg-body-tertiary">
+                          <td scope="col">Total Assertions</td>
+                          <td scope="col">Assertions Passed</td>
+                          <td scope="col">Assertions Failed</td>
+                        </tr>
+                      <tr class="border-top">
+                        <td>2</td>
+                        <td>2</td>
+                        <td>0</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <br>
+
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="row">
+                        <div class="col text-start">Detail</div>
+                        <div class="col text-end">Result</div>
+                      </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                          <div class="col text-start">RESPONSE BODY - RESULT PASS: Property 'status' with expectedValue 'ok' matched actualValue 'ok'.</div>
+                            <div class="text-color-passed col-1 text-end">PASSED</div>
+                        </div>
+                        <div class="row">
+                          <div class="col text-start">STRICT RESPONSE VALIDATION - RESULT PASS: All response json body items have been properly validated.</div>
+                            <div class="text-color-passed col-1 text-end">PASSED</div>
+                        </div>
+                    </div>
+                  </div>
+
+              </div>
+            </div>
+          </div>
+
+      </div>
+    </div>
+
+  </div>
+
+          
+  <div class="accordion-item passed show">
+    
+    <h2 class="accordion-header" id="heading-4">
+      <button class="accordion-button accordion-button-passed" type="button" data-bs-toggle="collapse" data-bs-target="#step-4" aria-expanded="true" aria-controls="step-4">Test 4: Send dynamic date in request header using xtest date() function (see "Pre-request Script").</button>
+    </h2>
+    
+    <div id="step-4" class="accordion-collapse collapse show" aria-labelledby="heading-4">
+      <div class="accordion-body">
+        
+
+          <div class="card">
+            <div class="card-header">Request</div>
+            <div class="card-body">
+              
+              <div class="grid text-start">
+                <div class="row mb-3">
+                  <div class="col-2">Request Method</div>
+                  <div class="col-auto border rounded">GET</div>
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col-2">Request URL</div>
+                  <div class="col border rounded">https://xtest-demo.httpsim.schwaby.io/date2</div>
+                </div>
+
+                <div class="row mb-3 overflow-hidden maxHeight">
+                  <div class="col-2">Request Headers</div>
+                  <div class="col overflow-auto border rounded maxHeight"><pre><span class="token key attr-name">custom-date-header</span><span class="token punctuation">:</span> <span class="token value attr-value">2023-04-18</span>
+<span class="token key attr-name">User-Agent</span><span class="token punctuation">:</span> <span class="token value attr-value">PostmanRuntime/7.29.0</span>
+<span class="token key attr-name">Accept</span><span class="token punctuation">:</span> <span class="token value attr-value">*/*</span>
+<span class="token key attr-name">Cache-Control</span><span class="token punctuation">:</span> <span class="token value attr-value">no-cache</span>
+<span class="token key attr-name">Postman-Token</span><span class="token punctuation">:</span> <span class="token value attr-value">d7ff3ed1-b036-4197-a55d-b76423623896</span>
+<span class="token key attr-name">Host</span><span class="token punctuation">:</span> <span class="token value attr-value">xtest-demo.httpsim.schwaby.io</span>
+<span class="token key attr-name">Accept-Encoding</span><span class="token punctuation">:</span> <span class="token value attr-value">gzip, deflate, br</span>
+<span class="token key attr-name">Connection</span><span class="token punctuation">:</span> <span class="token value attr-value">keep-alive</span>
+</pre></div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+
+        <br>
+
+
+          <div class="card">
+            <div class="card-header">Response</div>
+            <div class="card-body">
+
+              <div class="grid text-start">
+                <div class="row mb-3">
+                  <div class="col-2">Response Code</div>
+                  <div class="col-auto border rounded">200 OK</div>
+                </div>
+
+                <div class="row mb-3 overflow-hidden maxHeight">
+                  <div class="col-2">Response Headers</div>
+                  <div class="col overflow-auto border rounded maxHeight"><pre><span class="token key attr-name">Date</span><span class="token punctuation">:</span> <span class="token value attr-value">Tue, 18 Apr 2023 15:37:00 GMT</span>
+<span class="token key attr-name">Content-Type</span><span class="token punctuation">:</span> <span class="token value attr-value">application/json</span>
+<span class="token key attr-name">Transfer-Encoding</span><span class="token punctuation">:</span> <span class="token value attr-value">chunked</span>
+<span class="token key attr-name">Connection</span><span class="token punctuation">:</span> <span class="token value attr-value">keep-alive</span>
+<span class="token key attr-name">via</span><span class="token punctuation">:</span> <span class="token value attr-value">1.1 google</span>
+<span class="token key attr-name">CF-Cache-Status</span><span class="token punctuation">:</span> <span class="token value attr-value">DYNAMIC</span>
+<span class="token key attr-name">Report-To</span><span class="token punctuation">:</span> <span class="token value attr-value">{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=qSyQzBn4JmlWWe2a%2BarHCeQn5s%2BFE7QlKByF6%2FaeSbkOTkV0s9XoJd2LHFjIT8ZCEn4Dz4h%2BbdDnw1fPhHZ4GGZUZC1UkrCvygTd1Jb9Ix8krDQYhR6IKDAwc%2FpVhOdb72o8vkq9b%2F%2BeZkhVaAl6gA%3D%3D"}],"group":"cf-nel","max_age":604800}</span>
+<span class="token key attr-name">NEL</span><span class="token punctuation">:</span> <span class="token value attr-value">{"success_fraction":0,"report_to":"cf-nel","max_age":604800}</span>
+<span class="token key attr-name">Server</span><span class="token punctuation">:</span> <span class="token value attr-value">cloudflare</span>
+<span class="token key attr-name">CF-RAY</span><span class="token punctuation">:</span> <span class="token value attr-value">7b9dfc94debffaf4-SJC</span>
+<span class="token key attr-name">Content-Encoding</span><span class="token punctuation">:</span> <span class="token value attr-value">br</span>
+<span class="token key attr-name">alt-svc</span><span class="token punctuation">:</span> <span class="token value attr-value">h3=":443"; ma=86400, h3-29=":443"; ma=86400</span>
+</pre></div>
+                </div>
+
+                    <div class="row mb-3 overflow-hidden maxHeight">
+                      <div class="col-2">Response Body</div>
+                      <div class="col overflow-auto border rounded maxHeight"><pre><span class="token punctuation">{</span>
+    <span class="token property">"status"</span><span class="token operator">:</span> <span class="token string">"ok"</span>
+<span class="token punctuation">}</span></pre></div>
+                    </div>
+
+                <div class="row mb-3">
+                  <div class="col-2">Response Time</div>
+                  <div class="col-auto border rounded">59ms</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+        
+        <br>
+          <div class="card">
+            <div class="card-header">Assertions</div>
+            <div class="card-body">
+              <div class="grid">
+
+                <div class="card w-50 mx-auto">
+                  <table class="table table-borderless text-center">
+                    <tbody>
+                        <tr class="bg-body-tertiary">
+                          <td scope="col">Total Assertions</td>
+                          <td scope="col">Assertions Passed</td>
+                          <td scope="col">Assertions Failed</td>
+                        </tr>
+                      <tr class="border-top">
+                        <td>2</td>
+                        <td>2</td>
+                        <td>0</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <br>
+
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="row">
+                        <div class="col text-start">Detail</div>
+                        <div class="col text-end">Result</div>
+                      </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                          <div class="col text-start">RESPONSE BODY - RESULT PASS: Property 'status' with expectedValue 'ok' matched actualValue 'ok'.</div>
+                            <div class="text-color-passed col-1 text-end">PASSED</div>
+                        </div>
+                        <div class="row">
+                          <div class="col text-start">STRICT RESPONSE VALIDATION - RESULT PASS: All response json body items have been properly validated.</div>
+                            <div class="text-color-passed col-1 text-end">PASSED</div>
+                        </div>
+                    </div>
+                  </div>
+
+              </div>
+            </div>
+          </div>
+
+      </div>
+    </div>
+
+  </div>
+
+          
+  <div class="accordion-item passed show">
+    
+    <h2 class="accordion-header" id="heading-5">
+      <button class="accordion-button accordion-button-passed" type="button" data-bs-toggle="collapse" data-bs-target="#step-5" aria-expanded="true" aria-controls="step-5">Test 5: Send dynamic date in request body using xtest date() function (see "Pre-request Script").</button>
+    </h2>
+    
+    <div id="step-5" class="accordion-collapse collapse show" aria-labelledby="heading-5">
+      <div class="accordion-body">
+        
+
+          <div class="card">
+            <div class="card-header">Request</div>
+            <div class="card-body">
+              
+              <div class="grid text-start">
+                <div class="row mb-3">
+                  <div class="col-2">Request Method</div>
+                  <div class="col-auto border rounded">POST</div>
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col-2">Request URL</div>
+                  <div class="col border rounded">https://xtest-demo.httpsim.schwaby.io/date3</div>
+                </div>
+
+                <div class="row mb-3 overflow-hidden maxHeight">
+                  <div class="col-2">Request Headers</div>
+                  <div class="col overflow-auto border rounded maxHeight"><pre><span class="token key attr-name">Content-Type</span><span class="token punctuation">:</span> <span class="token value attr-value">application/json</span>
+<span class="token key attr-name">User-Agent</span><span class="token punctuation">:</span> <span class="token value attr-value">PostmanRuntime/7.29.0</span>
+<span class="token key attr-name">Accept</span><span class="token punctuation">:</span> <span class="token value attr-value">*/*</span>
+<span class="token key attr-name">Cache-Control</span><span class="token punctuation">:</span> <span class="token value attr-value">no-cache</span>
+<span class="token key attr-name">Postman-Token</span><span class="token punctuation">:</span> <span class="token value attr-value">7e2f67d7-8bfc-4f8e-ac83-a95a06f2bd9a</span>
+<span class="token key attr-name">Host</span><span class="token punctuation">:</span> <span class="token value attr-value">xtest-demo.httpsim.schwaby.io</span>
+<span class="token key attr-name">Accept-Encoding</span><span class="token punctuation">:</span> <span class="token value attr-value">gzip, deflate, br</span>
+<span class="token key attr-name">Connection</span><span class="token punctuation">:</span> <span class="token value attr-value">keep-alive</span>
+<span class="token key attr-name">Content-Length</span><span class="token punctuation">:</span> <span class="token value attr-value">33</span>
+</pre></div>
+                </div>
+
+                    <div class="row mb-3 overflow-hidden maxHeight">
+                      <div class="col-2">Request Body</div>
+                      <div class="col overflow-auto border rounded maxHeight"><pre><code><span class="token punctuation">{</span>
+	<span class="token property">"request-date"</span><span class="token operator">:</span> <span class="token string">"2023-04-18"</span>
+<span class="token punctuation">}</span></code></pre></div>
+                    </div>
+              </div>
+
+            </div>
+          </div>
+
+
+        <br>
+
+
+          <div class="card">
+            <div class="card-header">Response</div>
+            <div class="card-body">
+
+              <div class="grid text-start">
+                <div class="row mb-3">
+                  <div class="col-2">Response Code</div>
+                  <div class="col-auto border rounded">200 OK</div>
+                </div>
+
+                <div class="row mb-3 overflow-hidden maxHeight">
+                  <div class="col-2">Response Headers</div>
+                  <div class="col overflow-auto border rounded maxHeight"><pre><span class="token key attr-name">Date</span><span class="token punctuation">:</span> <span class="token value attr-value">Tue, 18 Apr 2023 15:37:01 GMT</span>
+<span class="token key attr-name">Content-Type</span><span class="token punctuation">:</span> <span class="token value attr-value">application/json</span>
+<span class="token key attr-name">Transfer-Encoding</span><span class="token punctuation">:</span> <span class="token value attr-value">chunked</span>
+<span class="token key attr-name">Connection</span><span class="token punctuation">:</span> <span class="token value attr-value">keep-alive</span>
+<span class="token key attr-name">via</span><span class="token punctuation">:</span> <span class="token value attr-value">1.1 google</span>
+<span class="token key attr-name">CF-Cache-Status</span><span class="token punctuation">:</span> <span class="token value attr-value">DYNAMIC</span>
+<span class="token key attr-name">Report-To</span><span class="token punctuation">:</span> <span class="token value attr-value">{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=jYt%2FdkMO4bKPPvbw5hhA4isOCqpG7YoUEmOK6J6cF7UiknX6O5z2O3Y1JofAGPDLChIhLWciEyDEsvTsXrKDVrV2oFV7%2BAE14k1VSxSlJY0ysdzbS4NTc1h0SD8nCWTYEb%2BRVJjWFrO3MmzoKQEFqg%3D%3D"}],"group":"cf-nel","max_age":604800}</span>
+<span class="token key attr-name">NEL</span><span class="token punctuation">:</span> <span class="token value attr-value">{"success_fraction":0,"report_to":"cf-nel","max_age":604800}</span>
+<span class="token key attr-name">Server</span><span class="token punctuation">:</span> <span class="token value attr-value">cloudflare</span>
+<span class="token key attr-name">CF-RAY</span><span class="token punctuation">:</span> <span class="token value attr-value">7b9dfc955fa7faf4-SJC</span>
+<span class="token key attr-name">Content-Encoding</span><span class="token punctuation">:</span> <span class="token value attr-value">br</span>
+<span class="token key attr-name">alt-svc</span><span class="token punctuation">:</span> <span class="token value attr-value">h3=":443"; ma=86400, h3-29=":443"; ma=86400</span>
+</pre></div>
+                </div>
+
+                    <div class="row mb-3 overflow-hidden maxHeight">
+                      <div class="col-2">Response Body</div>
+                      <div class="col overflow-auto border rounded maxHeight"><pre><span class="token punctuation">{</span>
+    <span class="token property">"status"</span><span class="token operator">:</span> <span class="token string">"ok"</span>
+<span class="token punctuation">}</span></pre></div>
+                    </div>
+
+                <div class="row mb-3">
+                  <div class="col-2">Response Time</div>
+                  <div class="col-auto border rounded">54ms</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+        
+        <br>
+          <div class="card">
+            <div class="card-header">Assertions</div>
+            <div class="card-body">
+              <div class="grid">
+
+                <div class="card w-50 mx-auto">
+                  <table class="table table-borderless text-center">
+                    <tbody>
+                        <tr class="bg-body-tertiary">
+                          <td scope="col">Total Assertions</td>
+                          <td scope="col">Assertions Passed</td>
+                          <td scope="col">Assertions Failed</td>
+                        </tr>
+                      <tr class="border-top">
+                        <td>2</td>
+                        <td>2</td>
+                        <td>0</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <br>
+
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="row">
+                        <div class="col text-start">Detail</div>
+                        <div class="col text-end">Result</div>
+                      </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                          <div class="col text-start">RESPONSE BODY - RESULT PASS: Property 'status' with expectedValue 'ok' matched actualValue 'ok'.</div>
+                            <div class="text-color-passed col-1 text-end">PASSED</div>
+                        </div>
+                        <div class="row">
+                          <div class="col text-start">STRICT RESPONSE VALIDATION - RESULT PASS: All response json body items have been properly validated.</div>
+                            <div class="text-color-passed col-1 text-end">PASSED</div>
+                        </div>
+                    </div>
+                  </div>
+
+              </div>
+            </div>
+          </div>
+
+      </div>
+    </div>
+
+  </div>
+
+      </div>
+
+  </div>
+
+  <footer class="mt-auto">
+    <br>
+    <br>
+    <br>
+    <div class="container text-center">
+      <div class="row">
+        <div class="col">
+          <a class="btn btn-outline-secondary" href="https://github.com/schwabyio/xrun" role="button">xRun Version 1.9.0</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
+
+

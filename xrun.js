@@ -9,13 +9,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 'use strict'
-//////////////////////////////////
-//INITIALIZE DEPENDENT MODULES
-//////////////////////////////////
+
 try {
   const xRunLib = require('./lib/xrun-lib')
-
-  //Initialize
   const xRun = new xRunLib()
   const programCommand = process.argv[2] || ''
 
@@ -28,93 +24,48 @@ try {
     if (programCommand === 'g' || programCommand === 'get') {
       (async () => {
         try {
-          let directoryList = await xRun.getDirectoryListAsync(xRun.settings)
+          const collectionInfoString = await xRun.getPostmanTests(xRun.settings)
 
-          xRun.createXRunObject(directoryList, function resultOfCreateXRunObject(errMsg, xRunObject) {
-            if (errMsg) {
-              console.log(errMsg)
-              process.exit(1)
-            } else {
-              xRun.getCollectionInfo(xRunObject, function resultOfGetCollectionInfo(errMsg, collectionInfoObject, collectionInfoString) {
-                if (errMsg) {
-                  console.log(errMsg)
-                  process.exit(1)
-                } else {
-                  console.log(collectionInfoString)
-                  process.exit(0)
-                }
-              })
-            }
-          })
+          console.log(collectionInfoString)
+          process.exit(0)
         } catch (errMsg) {
           console.log(errMsg)
           process.exit(1)
         }
       })()
     } else if (programCommand === 'a' || programCommand === 'all') {
-      xRun.getDirectoryList(function resultOfGetDirectoryList(errMsg, directoryList) {
-        if (errMsg) {
-          console.log(errMsg)
-          process.exit(1)
-        } else {
-          xRun.createXRunObject(directoryList, function resultOfCreatexRunObject(errMsg, xRunObject) {
-            if (errMsg) {
-              console.log(errMsg)
-              process.exit(1)
-            } else {
-              xRun.run(xRunObject, true, function resultOfRun(errMsg, testFinalResult) {
-                if (errMsg) {
-                  console.log(errMsg)
-                  process.exit(1)
-                } else {
-                  if (testFinalResult === 'PASSED') {
-                    process.exit(0)
-                  } else {
-                    process.exit(1)
-                  }
-                }
-              })
-            }
-          })
-        }
-      })
-    } else {
-      //Set collectionCSVList
-      const collectionCSVList = programCommand
+      (async () => {
+        try {
+          const testFinalResult = await xRun.runAllPostmanTests(xRun.settings)
 
-      xRun.getDirectoryList(function resultOfGetDirectoryList(errMsg, directoryList) {
-        if (errMsg) {
+          if (testFinalResult === 'PASSED') {
+            process.exit(0)
+          } else {
+            process.exit(1)
+          }
+        } catch (errMsg) {
           console.log(errMsg)
           process.exit(1)
-        } else {
-          xRun.createXRunObject(directoryList, function resultOfCreatexRunObject(errMsg, xRunObject) {
-            if (errMsg) {
-              console.log(errMsg)
-              process.exit(1)
-            } else {
-              xRun.filterXRunObjectFromCollectionList(xRunObject, collectionCSVList, function resultOfFilter(errMsg, xRunObject) {
-                if (errMsg) {
-                  console.log(errMsg)
-                  process.exit(1)
-                } else {
-                  xRun.run(xRunObject, true, function resultOfRun(errMsg, testFinalResult) {
-                    if (errMsg) {
-                      console.log(errMsg)
-                      process.exit(1)
-                    } else {
-                      if (testFinalResult === 'PASSED') {
-                        process.exit(0)
-                      } else {
-                        process.exit(1)
-                      }
-                    }
-                  })
-                }
-              })
-            }
-          })
         }
-      })
+      })()
+    } else {
+      (async () => {
+        try {
+          //Set collectionCSVList
+          const collectionCSVList = programCommand
+
+          const testFinalResult = await xRun.runCSVPostmanTests(xRun.settings, collectionCSVList)
+
+          if (testFinalResult === 'PASSED') {
+            process.exit(0)
+          } else {
+            process.exit(1)
+          }
+        } catch (errMsg) {
+          console.log(errMsg)
+          process.exit(1)
+        }
+      })()
     }
   }
 

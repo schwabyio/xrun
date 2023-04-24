@@ -12,3 +12,6 @@ settings/settings.json
 
 # code coverage reports
 coverage/
+
+# vscode/
+.vscode/
