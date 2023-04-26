@@ -10,7 +10,7 @@
     "@colors/colors": "1.5.0",
     "@slack/web-api": "6.8.0",
     "adm-zip": "0.5.9",
-    "convict": "6.2.3",
+    "convict": "6.2.4",
     "escape-html": "1.0.3",
     "handlebars": "4.7.7",
     "json5": "2.2.3",
@@ -21,7 +21,7 @@
     "rimraf": "4.4.1",
     "uuid": "9.0.0"
   },
-  "version": "1.9.5",
+  "version": "1.9.6",
   "main": "xrun.js",
   "directories": {
     "lib": "lib"
