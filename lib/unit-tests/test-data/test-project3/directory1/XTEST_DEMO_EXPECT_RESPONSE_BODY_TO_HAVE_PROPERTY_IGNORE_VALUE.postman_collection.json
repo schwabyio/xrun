@@ -1,0 +1,53 @@
+{
+	"info": {
+		"_postman_id": "ad448225-fe79-4ec3-92fb-aefbdc2810cf",
+		"name": "XTEST_DEMO_EXPECT_RESPONSE_BODY_TO_HAVE_PROPERTY_IGNORE_VALUE",
+		"description": "Objective: Validate response body property exists. Ignore property value.\n\n``` javascript\nexpectResponseBodyToHaveProperty(jsonPath [String]);\n\n```",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24782047"
+	},
+	"item": [
+		{
+			"name": "Validate response body property exists. Ignore property value.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response body",
+							"expectResponseBodyToHaveProperty(\"id.value\");",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/responseToHaveSingleJsonProperty",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"responseToHaveSingleJsonProperty"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

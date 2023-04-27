@@ -1,0 +1,221 @@
+{
+	"info": {
+		"_postman_id": "ba4ceb85-56a8-4201-a979-4b2b18b23327",
+		"name": "XTEST_DEMO_EXPECT_RESPONSE_BODY_TO_HAVE_PROPERTY_VALUE_NUMBER_DATE_AS_EPOCH",
+		"description": "Objective: Validate response body property exists with expectedValue as +-secondsOffset and specialHandling dateAsEpoch.\n\n``` javascript\nexpectResponseBodyToHaveProperty(jsonPath [String], expectedValue [Number], specialHandling [String] = \"dateAsEpoch\");\n\n```",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24782047"
+	},
+	"item": [
+		{
+			"name": "Validate response body property exists with an epoch value of today or 0 secondsOffset (+0 days).",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response body",
+							"expectResponseBodyToHaveProperty(\"epoch.date\", 0, 'dateAsEpoch');",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/responseToHaveSingleJsonPropertyEpochPlus0Day",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"responseToHaveSingleJsonPropertyEpochPlus0Day"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate response body property exists with an epoch value of tomorrow or +86400 secondsOffset (+1 day).",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response body",
+							"expectResponseBodyToHaveProperty(\"epoch.date\", 86400, 'dateAsEpoch');",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/responseToHaveSingleJsonPropertyEpochPlus1Day",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"responseToHaveSingleJsonPropertyEpochPlus1Day"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate response body property exists with an epoch value of yesterday or -86400 secondsOffset (-1 day).",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response body",
+							"expectResponseBodyToHaveProperty(\"epoch.date\", -86400, 'dateAsEpoch');",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/responseToHaveSingleJsonPropertyEpochMinus1Day",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"responseToHaveSingleJsonPropertyEpochMinus1Day"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate response body property exists with an epoch value of one week from today or 604800 secondsOffset (+7 days).",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response body",
+							"expectResponseBodyToHaveProperty(\"epoch.date\", 604800, 'dateAsEpoch');",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/responseToHaveSingleJsonPropertyEpochPlus7Days",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"responseToHaveSingleJsonPropertyEpochPlus7Days"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate response body property exists with an epoch value of one week ago from today or -604800 secondsOffset (-7 days).",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response body",
+							"expectResponseBodyToHaveProperty(\"epoch.date\", -604800, 'dateAsEpoch');",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/responseToHaveSingleJsonPropertyEpochMinus7Days",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"responseToHaveSingleJsonPropertyEpochMinus7Days"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

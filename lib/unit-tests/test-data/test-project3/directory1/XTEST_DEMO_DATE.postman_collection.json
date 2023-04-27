@@ -1,0 +1,338 @@
+{
+	"info": {
+		"_postman_id": "7f1f8150-47f5-4dff-9a8d-4c9f322b9baa",
+		"name": "XTEST_DEMO_DATE",
+		"description": "**Objective: Validate the date() function in the following places:**\n\n- response body\n- response header\n- request url\n- request header\n- request body\n    \n\n``` javascript\ndate(dateFormat [String], secondsOffset [Number format: +-offsetInSeconds], timeZoneScheme [String]);\n\n```\n\nThis function can be used to dynamically generate a date/time value in any required format. [See here for supported dateFormat specifiers.](https://github.com/samsonjs/strftime/blob/master/Readme.md#supported-specifiers)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24782047"
+	},
+	"item": [
+		{
+			"name": "Validate dynamic date in response body using xtest date() function.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response body",
+							"expectResponseBodyToHaveProperty(\"date10DaysInFutureInFormatYYYYMMDD.date\", date('%Y%m%d', 864000, 'U'));",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/date1",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"date1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate dynamic date in response header using xtest date() function.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response header",
+							"expectResponseToHaveHeader(\"custom-header-date\", date('%Y%m%d', 864000, 'U'));",
+							"",
+							"//Validate response body",
+							"expectResponseBodyToHaveProperty(\"status\", \"ok\");",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/date4",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"date4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send dynamic date in url using xtest date() function (see \"Pre-request Script\").",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response body",
+							"expectResponseBodyToHaveProperty(\"status\", \"ok\");",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Set collection variable",
+							"pm.collectionVariables.set(\"url-date\", date('%Y-%m-%d', 0, 'U'));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/date2?date={{url-date}}",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"date2"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "{{url-date}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send dynamic date in request header using xtest date() function (see \"Pre-request Script\").",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response body",
+							"expectResponseBodyToHaveProperty(\"status\", \"ok\");",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Set collection variable",
+							"pm.collectionVariables.set(\"header-date\", date('%Y-%m-%d', 0, 'U'));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "custom-date-header",
+						"value": "{{header-date}}"
+					}
+				],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/date2",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"date2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send dynamic date in request body using xtest date() function (see \"Pre-request Script\").",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response body",
+							"expectResponseBodyToHaveProperty(\"status\", \"ok\");",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Set collection variable",
+							"pm.collectionVariables.set(\"body-date\", date('%Y-%m-%d', 0, 'U'));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"request-date\": \"{{body-date}}\"\n}"
+				},
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/date3",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"date3"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"//Load xtest",
+					"var xtest = eval(pm.globals.get(\"xtest\"));"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url-date",
+			"value": ""
+		},
+		{
+			"key": "header-date",
+			"value": ""
+		},
+		{
+			"key": "body-date",
+			"value": ""
+		}
+	]
+}

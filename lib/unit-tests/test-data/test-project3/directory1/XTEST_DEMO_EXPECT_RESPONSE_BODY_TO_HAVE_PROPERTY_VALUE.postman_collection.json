@@ -1,0 +1,56 @@
+{
+	"info": {
+		"_postman_id": "43a638a3-2cd6-4bc1-bb25-d1d6b2409c87",
+		"name": "XTEST_DEMO_EXPECT_RESPONSE_BODY_TO_HAVE_PROPERTY_VALUE",
+		"description": "Objective: Validate response body property exists with expected value and expected data type.\n\n``` javascript\nexpectResponseBodyToHaveProperty(jsonPath [String], expectedValue [String, Boolean, Number, or null]);\n\n```",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24782047"
+	},
+	"item": [
+		{
+			"name": "Validate response body property exists with expected value and expected data type.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response body",
+							"expectResponseBodyToHaveProperty(\"string.value\", \"rl3FShupSKpo8tpe07JHKOk1rRrcrvEmtaUMKJfR3hM\");",
+							"expectResponseBodyToHaveProperty(\"boolean.value\", true);",
+							"expectResponseBodyToHaveProperty(\"number.value\", 12345);",
+							"expectResponseBodyToHaveProperty(\"null.value\", null);",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/responseToHaveJsonPropertiesWithAllDataTypes",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"responseToHaveJsonPropertiesWithAllDataTypes"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

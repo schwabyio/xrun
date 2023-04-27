@@ -1,0 +1,95 @@
+{
+	"info": {
+		"_postman_id": "0061c544-85cd-4e55-95a9-ccc9268dcc74",
+		"name": "XTEST_DEMO_EXPECT_RESPONSE_BODY_TO_HAVE_PROPERTY_VALUE_STRING_DATE_AS_EPOCH",
+		"description": "Objective: Validate response body property exists with expectedValue in string format \"YYYY-MM-DD\" and specialHandling dateAsEpoch.\n\n``` javascript\nexpectResponseBodyToHaveProperty(jsonPath [String], expectedValue [String], specialHandling [String] = \"dateAsEpoch\");\n\n```",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24782047"
+	},
+	"item": [
+		{
+			"name": "Validate response property exists with an epoch value of 2020-10-31.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response body",
+							"expectResponseBodyToHaveProperty(\"epoch.date\", \"2020-10-31\", 'dateAsEpoch');",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/responseToHaveSingleJsonPropertyEpochHardCoded20201031",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"responseToHaveSingleJsonPropertyEpochHardCoded20201031"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate response property exists with an epoch value of 2020-10-31-07:00.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response body",
+							"expectResponseBodyToHaveProperty(\"epoch.date\", \"2020-10-31-07:00\", 'dateAsEpoch');",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/responseToHaveSingleJsonPropertyEpochHardCoded20201031",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"responseToHaveSingleJsonPropertyEpochHardCoded20201031"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,56 @@
+{
+	"info": {
+		"_postman_id": "eb6648c7-b48e-413e-b8fa-b1b7c366ed53",
+		"name": "XTEST_DEMO_EXPECT_RESPONSE_BODY_TO_HAVE_PROPERTY_BUT_NOT_WITH_GIVEN_VALUE",
+		"description": "**Objective:** Validate response body property exists but NOT with a given value.\n\n``` javascript\nexpectResponseBodyToHaveProperty(jsonPath [String], expectedValue [String, Boolean, Number, or null], specialHandling [String] = \"notThisExpectedValue\");\n\n```",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24782047"
+	},
+	"item": [
+		{
+			"name": "Validate response body property exists but NOT with a given value.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, false);",
+							"",
+							"//Validate response body",
+							"expectResponseBodyToHaveProperty(\"string.value\", \"XXXX\", \"notThisExpectedValue\");",
+							"expectResponseBodyToHaveProperty(\"boolean.value\", false, \"notThisExpectedValue\");",
+							"expectResponseBodyToHaveProperty(\"number.value\", \"12345\", \"notThisExpectedValue\");",
+							"expectResponseBodyToHaveProperty(\"null.value\", undefined, \"notThisExpectedValue\");",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/responseToHaveJsonPropertiesWithAllDataTypes",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"responseToHaveJsonPropertiesWithAllDataTypes"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

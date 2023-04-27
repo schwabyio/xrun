@@ -77,8 +77,7 @@ npm install
     "slackHardAlertOnFailure": true,
     "projectName": "xtest",
     "environmentType": "dev1",
-    "xRunProjectPath": "[YOUR-GIT-BASE-PATH]/xtest/tests/postman",
-    "suiteId": "regression"
+    "xRunProjectPath": "[YOUR-GIT-BASE-PATH]/xtest/tests/postman"
   }
 ```
 
@@ -99,10 +98,10 @@ ________________________________________________________________________________
 
           <program-command> - Required. Valid program-command values are:
 
-                                          g[et]  - GET a list of Postman collections within the given suiteId.
-                                          a[ll]  - Run ALL Postman collections within the given suiteId.
-                               <collectionList>  - Run one or more Postman collections within the given suiteId by providing a
-                                                   csv list of COLLECTION NAMEs.
+                                          g[et]  - GET a list of Postman collections within the given xRunProjectPath.
+                                          a[ll]  - Run ALL Postman collections within the given xRunProjectPath.
+                               <collectionList>  - Run one or more Postman collections within the given xRunProjectPath by
+                                                   providing a csv list of COLLECTION NAMEs.
 
     --settingsKey settingsValue - Optional. Any number of settings overrides.
 
@@ -112,7 +111,7 @@ ________________________________________________________________________________
 <br>
 
 ## Configurations
-All available configurations with documentation and defaults can be viewed here:
+All available configurations are documented here:
 https://github.com/schwabyio/xrun/lib/config.js
 
 Configuration Order of Precedence (lowest to highest):

@@ -1,9 +1,0 @@
-{
-    "regression": [
-        "directory1"
-    ],
-    "empty": [],
-    "invalid-directory": [
-        "does-not-exist"
-    ]
-}
