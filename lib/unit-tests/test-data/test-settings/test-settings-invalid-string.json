@@ -1,0 +1,6 @@
+{
+    "slackChannel": false,
+    "projectName": "test-project1",
+    "environmentType": "test-env1",
+    "xRunProjectPath": "/some/xrun/project/path"
+}

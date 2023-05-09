@@ -1,0 +1,13 @@
+{
+    "limitConcurrency": 5,
+    "autoOpenTestResultHtml": false,
+    //"sendSummaryResultsToSlack": true,
+    //"slackChannel": "C04XXXXXXXX",
+    //"slackToken": "xoxb-XXXXXXXXXXXXXXXXXXXXXXXXX",
+    //"slackHardAlertOnFailure": true,
+    "slackHardAlertOnFailure": "true",
+    "sendSummaryResultsToSlack": true,
+    "projectName": "test-project1",
+    "environmentType": "test-env1",
+    "xRunProjectPath": "/some/xrun/project/path"
+}

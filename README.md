@@ -1,15 +1,16 @@
 ![xRun Image](./resources/images/xrun-logo-500.png)
 <!-- ![Postman Image](https://assets.getpostman.com/common-share/postman-logo-horizontal-320x132.png) -->
-
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/schwabyio/xrun/blob/main/LICENSE) [![npm version](https://badge.fury.io/js/@schwabyio%2Fxrun.svg)](https://www.npmjs.com/package/@schwabyio/xrun) [![code coverage](https://img.shields.io/badge/Code%20Coverage-81.7%25-green)](https://img.shields.io)
 
 ## Table of Contents
 - [Overview](#overview)
+- [Features](#features)
 - [Demos](#demos)
   1. [Demo Primary Commands](#demo-primary-commands)
   2. [Demo Reporting](#demo-reporting)
 - [Installation Steps](#installation-steps)
 - [Usage](#usage)
-- [Configurations](#configurations)
+- [Settings](#settings)
 
 
 <br>
@@ -17,14 +18,15 @@
 # xRun - CLI Runner For Postman
 
 ## Overview
-xRun is a command line interface (CLI) app that extends [Newman](https://github.com/postmanlabs/newman) to enable your organization to run Postman tests with speed and at scale. These are the xRun specific features:
-* Direct support for [xtest](https://github.com/schwabyio/xtest)
-* Run tests locally or as part of Continuous Integration (CI) testing
-* Configuration support using a settings.json file with command line override capability
-* Run Postman tests in parallel with a simple configurable `limitConcurrency` setting
-* Group tests for projects however you like using project-level test suites.json definition files
-* Test results in html format that are intuitive and easy to understand
-* Summary results sent to your chosen Slack channel
+xRun is a command line interface (CLI) app that extends [Newman](https://github.com/postmanlabs/newman) to enable your organization to run Postman tests with speed and at scale.
+
+## Features
+* Direct support for [xtest!](https://github.com/schwabyio/xtest)
+* Run Postman tests in parallel!
+* Run tests locally or as part of Continuous Integration (CI) with your automated build server of choice!
+* Beautiful html reports that allow you to quickly filter failures!
+* Get test summary and results sent to slack on your mobile device!
+* Configurable settings.json file with command line override capability!
 
 <br>
 
@@ -52,56 +54,57 @@ https://user-images.githubusercontent.com/118861343/218165353-4081377f-78aa-4a14
 <br>
 
 ## Installation Steps
-1. Prerequisite: Install [Node.js](https://nodejs.org/en/download/) (skip step if you already have)
-2. Clone xRun project in the location of your choice (i.e. `[YOUR-GIT-BASE-PATH]`):
+1. Install [Node.js](https://nodejs.org/en/download/) (skip if you already have)
+2. Install xRun:
 ```console
-git clone git@github.com:schwabyio/xrun.git
+npm install -g @schwabyio/xrun
 ```
-3. Install dependencies:
+3. Create a local settings.json file (note the absolute path for step 4):
 ```console
-cd xrun
-npm install
+[LOCAL-SETTINGS-BASE-PATH]/settings.json
 ```
-4. Create the following settings.json file (NOTE: this file is not stored in Git):
-```console
-[YOUR-GIT-BASE-PATH]/xrun/settings/settings.json
-```
-5. Edit the settings.json with the configurations for your testing needs. All configurations are documented [here](lib/config.js). NOTE: comments are allowed. Below is an example:
+[See here for all available configurations](lib/json/settings-schema.json). Below is an example:
 ```console
 {
-    "limitConcurrency": 10,
-    "autoOpenTestResultHtml": true,
-    //"sendSummaryResultsToSlack": true,
-    "slackChannel": "C04XXXXXXXX",
-    "slackToken": "xoxb-XXXXXXXXXXXXXXXXXXXXXXXXX",
-    "slackHardAlertOnFailure": true,
-    "projectName": "xtest",
-    "environmentType": "dev1",
-    "xRunProjectPath": "[YOUR-GIT-BASE-PATH]/xtest/tests/postman"
-  }
+  "limitConcurrency": 10,
+  "autoOpenTestResultHtml": true,
+  //"sendSummaryResultsToSlack": true,
+  "slackChannel": "C04XXXXXXXX",
+  "slackToken": "xoxb-XXXXXXXXXXXXXXXXXXXXXXXXX",
+  "slackHardAlertOnFailure": true,
+  "projectName": "xtest",
+  "environmentType": "qa",
+  "xRunProjectPath": "[PATH-TO-PROJECT-THAT-CONTAINS-POSTMAN-COLLECTIONS]"
+}
 ```
-
+4. The first time you run 'xrun' on the command line you will be prompted for the absolute path to the settings.json file. Paste something similar to below:
+```console
+% xrun
+No settings path is currently set. Please provide one below.
+What is the absolute path to your xrun settings.json file? /Users/<USERNAME>/xrun/settings.json
+The path you have provided is '/Users/<USERNAME>/xrun/settings.json
+```
 <br>
 
 
 ## Usage
 ```console
-$ ./xRun.js 
+% xrun
 __________________________________________________________________________________________________________________________________
                                                                                                                                   
-                                                         xRun Ver. 1.0.0
+                                                         xRun Ver. 2.1.0
 __________________________________________________________________________________________________________________________________
 
 
-   USAGE:  $ ./xRun.js <program-command> [--settingsKey settingsValue]
+   USAGE: xrun <program-command> [--settingsKey settingsValue]
 
 
           <program-command> - Required. Valid program-command values are:
 
                                           g[et]  - GET a list of Postman collections within the given xRunProjectPath.
                                           a[ll]  - Run ALL Postman collections within the given xRunProjectPath.
-                               <collectionList>  - Run one or more Postman collections within the given xRunProjectPath by
-                                                   providing a csv list of COLLECTION NAMEs.
+                               <collectionList>  - Run one or more Postman collections within the given xRunProjectPath
+                                                   by providing a csv list of COLLECTION NAMEs.
 
     --settingsKey settingsValue - Optional. Any number of settings overrides.
 
@@ -110,11 +113,11 @@ ________________________________________________________________________________
 
 <br>
 
-## Configurations
-All available configurations are documented here:
-https://github.com/schwabyio/xrun/lib/config.js
+## Settings
+All available settings are documented here:
+https://github.com/schwabyio/xrun/lib/json/settings-schema.json
 
-Configuration Order of Precedence (lowest to highest):
+Settings Order of Precedence (lowest to highest):
 1. Default value
 2. Local settings.json override
 3. Environment variables override

@@ -7,8 +7,8 @@ node_modules/
 # test-results/
 test-results/
 
-# settings/settings.json
-settings/settings.json
+# settings/app.json
+settings/app.json
 
 # code coverage reports
 coverage/

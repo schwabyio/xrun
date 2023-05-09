@@ -17,14 +17,32 @@ try {
 
 
   if (! programCommand) {
-    //Usage
-    console.log(xRun.getUsage())
-    process.exit(0)
+    (async () => {
+      try {
+        
+        const settingsPath = await xRun.initializeSettingsPath()
+
+        const settings = await xRun.getSettings(settingsPath)
+
+        const usage = await xRun.getUsage()
+
+        console.log(usage)
+        process.exit(0)
+      } catch (errMsg) {
+        console.log(errMsg)
+        process.exit(1)
+      }
+    })()
   } else {
     if (programCommand === 'g' || programCommand === 'get') {
       (async () => {
         try {
-          const collectionInfoString = await xRun.getPostmanTests(xRun.settings)
+
+          const settingsPath = await xRun.initializeSettingsPath()
+
+          const settings = await xRun.getSettings(settingsPath)
+
+          const collectionInfoString = await xRun.getPostmanTests(settings)
 
           console.log(collectionInfoString)
           process.exit(0)
@@ -36,7 +54,12 @@ try {
     } else if (programCommand === 'a' || programCommand === 'all') {
       (async () => {
         try {
-          const testFinalResult = await xRun.runAllPostmanTests(xRun.settings)
+
+          const settingsPath = await xRun.initializeSettingsPath()
+
+          const settings = await xRun.getSettings(settingsPath)
+
+          const testFinalResult = await xRun.runAllPostmanTests(settings)
 
           if (testFinalResult === 'PASSED') {
             process.exit(0)
@@ -51,10 +74,15 @@ try {
     } else {
       (async () => {
         try {
+
+          const settingsPath = await xRun.initializeSettingsPath()
+
+          const settings = await xRun.getSettings(settingsPath)
+
           //Set collectionCSVList
           const collectionCSVList = programCommand
 
-          const testFinalResult = await xRun.runCSVPostmanTests(xRun.settings, collectionCSVList)
+          const testFinalResult = await xRun.runCSVPostmanTests(settings, collectionCSVList)
 
           if (testFinalResult === 'PASSED') {
             process.exit(0)
