@@ -1,6 +1,6 @@
 ![xRun Image](./resources/images/xrun-logo-500.png)
 <!-- ![Postman Image](https://assets.getpostman.com/common-share/postman-logo-horizontal-320x132.png) -->
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/schwabyio/xrun/blob/main/LICENSE) [![npm version](https://badge.fury.io/js/@schwabyio%2Fxrun.svg)](https://www.npmjs.com/package/@schwabyio/xrun) [![code coverage](https://img.shields.io/badge/Code%20Coverage-81.7%25-green)](https://img.shields.io)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/schwabyio/xrun/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/@schwabyio%252Fxrun)](https://www.npmjs.com/package/@schwabyio/xrun) [![code coverage](https://img.shields.io/badge/Code%20Coverage-81.7%25-green)](https://img.shields.io)
 
 ## Table of Contents
 - [Overview](#overview)
@@ -54,16 +54,16 @@ https://user-images.githubusercontent.com/118861343/218165353-4081377f-78aa-4a14
 <br>
 
 ## Installation Steps
-1. Install [Node.js](https://nodejs.org/en/download/) (skip if you already have)
-2. Install xRun:
+1. Install Node.js ([It's recommended to install Node.js using node version manager](https://github.com/nvm-sh/nvm)).
+2. Install xRun ([See here if you receive EACCES permissions errors when installing packages globally](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally)):
 ```console
 npm install -g @schwabyio/xrun
 ```
-3. Create a local settings.json file (note the absolute path for step 4):
+3. Create a local settings.json file (note the absolute path for step 4). Below is an example absolute path:
 ```console
-[LOCAL-SETTINGS-BASE-PATH]/settings.json
+/Users/john/xrun/settings.json
 ```
-[See here for all available configurations](lib/json/settings-schema.json). Below is an example:
+[See here for all available configurations](lib/json/settings-schema.json). Below is an example settings.json file:
 ```console
 {
   "limitConcurrency": 10,
@@ -77,12 +77,12 @@ npm install -g @schwabyio/xrun
   "xRunProjectPath": "[PATH-TO-PROJECT-THAT-CONTAINS-POSTMAN-COLLECTIONS]"
 }
 ```
-4. The first time you run 'xrun' on the command line you will be prompted for the absolute path to the settings.json file. Paste something similar to below:
+4. The first time you run 'xrun' on the command line you will be prompted for the absolute path to the settings.json file. Type or paste the absolute path to the settings.json you created in step 3. Below is an example:
 ```console
 % xrun
 No settings path is currently set. Please provide one below.
-What is the absolute path to your xrun settings.json file? /Users/<USERNAME>/xrun/settings.json
-The path you have provided is '/Users/<USERNAME>/xrun/settings.json
+What is the absolute path to your xrun settings.json file? /Users/john/xrun/settings.json
+The path you have provided is '/Users/john/xrun/settings.json
 ```
 <br>
 
