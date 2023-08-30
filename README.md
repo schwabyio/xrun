@@ -28,8 +28,8 @@ xRun is a command line interface (CLI) app that extends [Newman](https://github.
 * Generate junit reports (provided by Postman's Newman).
 * Get test summary and results sent to slack on your mobile device.
 * Configurable settings.json file with command line override capability.
-# By default, all folders (and tests within) from the configured xRunProjectPath are run. You can exclude folders using an exclusion list.
-# Single out one or more tests to run by specifying a CSV list of test cases from the command line.
+* By default, all folders (and tests within) from the configured xRunProjectPath are run. You can exclude folders using an exclusion list.
+* Single out one or more tests to run by specifying a CSV list of test cases from the command line.
 
 <br>
 
