@@ -17,11 +17,23 @@
       "default": 600000,
       "arg": "timeoutScript"
     },
+    "generateJUnitResults": {
+      "doc": "Generate JUnit results reporter (provided by Postman's Newman).",
+      "format": "boolean",
+      "default": false,
+      "arg": "generateJUnitResults"
+    },
     "autoOpenTestResultHtml": {
       "doc": "Auto open test result in web browser after a run.",
       "format": "boolean",
       "default": false,
       "arg": "autoOpenTestResultHtml"
+    },
+    "testResultsBasePath": {
+      "doc": "If not specified, the default is the same path to your local settings.json.",
+      "format": "string",
+      "default": "",
+      "arg": "testResultsBasePath"
     },
     "uploadTestResultsToWebserver": {
       "doc": "Upload html test results to web server (for CI).",

@@ -1,6 +1,6 @@
 ![xRun Image](./resources/images/xrun-logo-500.png)
 <!-- ![Postman Image](https://assets.getpostman.com/common-share/postman-logo-horizontal-320x132.png) -->
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/schwabyio/xrun/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/@schwabyio%252Fxrun)](https://www.npmjs.com/package/@schwabyio/xrun) [![code coverage](https://img.shields.io/badge/Code%20Coverage-81.7%25-green)](https://img.shields.io)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/schwabyio/xrun/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/@schwabyio%252Fxrun)](https://www.npmjs.com/package/@schwabyio/xrun) [![code coverage](https://img.shields.io/badge/Code%20Coverage-80.32%25-green)](https://img.shields.io)
 
 ## Table of Contents
 - [Overview](#overview)
@@ -22,11 +22,14 @@ xRun is a command line interface (CLI) app that extends [Newman](https://github.
 
 ## Features
 * Direct support for [xtest!](https://github.com/schwabyio/xtest)
-* Run Postman tests in parallel!
-* Run tests locally or as part of Continuous Integration (CI) with your automated build server of choice!
-* Beautiful html reports that allow you to quickly filter failures!
-* Get test summary and results sent to slack on your mobile device!
-* Configurable settings.json file with command line override capability!
+* Run Postman tests in parallel.
+* Run tests locally or as part of Continuous Integration (CI) with your automated build server of choice.
+* Generates beautiful html reports that allow you to quickly filter and zero in on test failures.
+* Generate junit reports (provided by Postman's Newman).
+* Get test summary and results sent to slack on your mobile device.
+* Configurable settings.json file with command line override capability.
+# By default, all folders (and tests within) from the configured xRunProjectPath are run. You can exclude folders using an exclusion list.
+# Single out one or more tests to run by specifying a CSV list of test cases from the command line.
 
 <br>
 
@@ -92,7 +95,7 @@ The path you have provided is '/Users/john/xrun/settings.json
 % xrun
 __________________________________________________________________________________________________________________________________
                                                                                                                                   
-                                                         xRun Ver. 2.1.0
+                                                         xRun Ver. 2.2.0
 __________________________________________________________________________________________________________________________________
 
 

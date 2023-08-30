@@ -21,7 +21,7 @@
     "rimraf": "4.4.1",
     "uuid": "9.0.0"
   },
-  "version": "2.1.0",
+  "version": "2.2.0",
   "main": "xrun.js",
   "directories": {
     "lib": "lib"
