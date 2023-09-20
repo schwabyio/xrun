@@ -117,8 +117,8 @@ ________________________________________________________________________________
 <br>
 
 ## Settings
-All available settings are documented here:
-https://github.com/schwabyio/xrun/lib/json/settings-schema.json
+All available settings are documented [here](lib/json/settings-schema.json)
+
 
 Settings Order of Precedence (lowest to highest):
 1. Default value
