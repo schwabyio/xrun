@@ -15,3 +15,6 @@ coverage/
 
 # vscode/
 .vscode/
+
+# IntelliJ
+.idea
