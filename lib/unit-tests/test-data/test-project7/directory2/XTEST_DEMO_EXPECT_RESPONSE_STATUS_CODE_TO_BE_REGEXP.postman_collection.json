@@ -1,0 +1,221 @@
+{
+	"info": {
+		"_postman_id": "5473ac54-d952-4b36-9c7d-63ade1c075f4",
+		"name": "XTEST_DEMO_EXPECT_RESPONSE_STATUS_CODE_TO_BE_REGEXP",
+		"description": "Objective: Validate response status code as regular expression.\n\n``` javascript\nexpectResponseStatusCodeToBe(expectedValue [RegExp]);\n\n```",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24782047"
+	},
+	"item": [
+		{
+			"name": "status code 200 - RegExp literal = /^2/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response status code",
+							"expectResponseStatusCodeToBe(/^2/);",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/responseStatusCode200",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"responseStatusCode200"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "status code 204 - RegExp literal = /^2/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response status code",
+							"expectResponseStatusCodeToBe(/^2/);",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/responseStatusCode204",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"responseStatusCode204"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "status code 404 - RegExp literal = /^4/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response status code",
+							"expectResponseStatusCodeToBe(/^4/);",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/responseStatusCode404",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"responseStatusCode404"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "status code 500 - RegExp literal = /^5/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response status code",
+							"expectResponseStatusCodeToBe(/^5/);",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/responseStatusCode500",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"responseStatusCode500"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "status code 200 - RegExp constructor = new RegExp('^2')",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response status code",
+							"expectResponseStatusCodeToBe(new RegExp('^2'));",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/responseStatusCode200",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"responseStatusCode200"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

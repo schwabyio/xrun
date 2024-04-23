@@ -1,0 +1,95 @@
+{
+	"info": {
+		"_postman_id": "a68792a9-165c-4a50-880d-dae0c94628ab",
+		"name": "XTEST_DEMO_EXPECT_RESPONSE_BODY_TO_HAVE_PROPERTY_BUT_NOT_WITH_REGEXP_MATCH",
+		"description": "Objective: Validate response body property exists but does NOT match against a regular expression.\n\n``` javascript\nexpectResponseBodyToHaveProperty(jsonPath [String], expectedValue [RegExp], specialHandling [String] = \"notThisExpectedValue\");\n\n```",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24782047"
+	},
+	"item": [
+		{
+			"name": "Validate response body property exists but does NOT match against RegExp literal.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response body",
+							"expectResponseBodyToHaveProperty(\"id.value\", /$rl3FShupS/, \"notThisExpectedValue\");",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/responseToHaveSingleJsonProperty",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"responseToHaveSingleJsonProperty"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate response body property exists but does NOT match against RegExp constructor.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response body",
+							"expectResponseBodyToHaveProperty(\"id.value\", new RegExp(\"$rl3FShupS\"), \"notThisExpectedValue\");",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/responseToHaveSingleJsonProperty",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"responseToHaveSingleJsonProperty"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

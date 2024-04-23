@@ -295,29 +295,36 @@
             <div class="card-header">Response</div>
             <div class="card-body">
 
-              <div class="grid text-start">
-                <div class="row mb-3">
-                  <div class="col-2">Response Code</div>
-                  <div class="col-auto border rounded">{{code}} {{status}}</div>
+              {{#if failureMessage}}
+                <div class="row mb-3 overflow-hidden maxHeight ">
+                  <div class="col-2">Failure</div>
+                  <div class="col overflow-auto border rounded maxHeight text-color-failed"><pre>{{failureMessage}}</pre></div>
                 </div>
+              {{else}}
+                <div class="grid text-start">
+                  <div class="row mb-3">
+                    <div class="col-2">Response Code</div>
+                    <div class="col-auto border rounded">{{code}} {{status}}</div>
+                  </div>
 
-                <div class="row mb-3 overflow-hidden maxHeight">
-                  <div class="col-2">Response Headers</div>
-                  <div class="col overflow-auto border rounded maxHeight"><pre>{{headersHtml}}</pre></div>
+                  <div class="row mb-3 overflow-hidden maxHeight">
+                    <div class="col-2">Response Headers</div>
+                    <div class="col overflow-auto border rounded maxHeight"><pre>{{headersHtml}}</pre></div>
+                  </div>
+
+                    {{#if body}}
+                      <div class="row mb-3 overflow-hidden maxHeight">
+                        <div class="col-2">Response Body</div>
+                        <div class="col overflow-auto border rounded maxHeight"><pre>{{bodyHtmlEscaped}}</pre></div>
+                      </div>
+                    {{/if}}
+
+                  <div class="row mb-3">
+                    <div class="col-2">Response Time</div>
+                    <div class="col-auto border rounded">{{responseTime}}ms</div>
+                  </div>
                 </div>
-
-                  {{#if body}}
-                    <div class="row mb-3 overflow-hidden maxHeight">
-                      <div class="col-2">Response Body</div>
-                      <div class="col overflow-auto border rounded maxHeight"><pre>{{bodyHtmlEscaped}}</pre></div>
-                    </div>
-                  {{/if}}
-
-                <div class="row mb-3">
-                  <div class="col-2">Response Time</div>
-                  <div class="col-auto border rounded">{{responseTime}}ms</div>
-                </div>
-              </div>
+              {{/if}}
 
             </div>
           </div>

@@ -124,5 +124,11 @@
       "format": "boolean",
       "default": true,
       "arg": "ignoreRedirects"
+    },
+    "trustedCaCertDirectoryPath": {
+      "doc": "Directory path location to a single PEM formatted certificate file containing one or more trusted CAs. If an absolute directory path is provided that will be used, otherwise if just a directory name is provided, it will look for that directory from within the configured xRunProjectDirectoryName (e.g. <xRunProjectPath>/xrun/trustedCaCert ). Note: 1. The file name must not be included in the directory path. 2. Only one single pem file must exist in the directory (multiple CAs can be put in the single file). 3. The file must include a .pem file extension to be found.",
+      "format": "non-empty-string",
+      "default": "trustedCaCert",
+      "arg": "trustedCaCertDirectoryPath"
     }
 }

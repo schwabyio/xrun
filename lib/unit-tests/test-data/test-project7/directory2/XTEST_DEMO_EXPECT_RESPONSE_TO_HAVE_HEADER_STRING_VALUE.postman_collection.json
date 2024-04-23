@@ -1,0 +1,53 @@
+{
+	"info": {
+		"_postman_id": "3f0af2a8-2014-4d54-8e0d-23d12a108811",
+		"name": "XTEST_DEMO_EXPECT_RESPONSE_TO_HAVE_HEADER_STRING_VALUE",
+		"description": "Objective: Validate response header key and header value as strings.\n\n``` javascript\nexpectResponseToHaveHeader(expectedHeaderKey [String], expectedHeaderValue [String]);\n\n```",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24782047"
+	},
+	"item": [
+		{
+			"name": "Validate response header key \"Custom-Header\" exists with value \"This is the custom header value\".",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response headers",
+							"expectResponseToHaveHeader(\"custom-header\", \"This is the custom header value\");",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/responseToHaveHeader",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"responseToHaveHeader"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

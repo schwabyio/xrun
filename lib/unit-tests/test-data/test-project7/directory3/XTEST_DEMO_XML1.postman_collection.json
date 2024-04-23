@@ -1,0 +1,94 @@
+{
+	"info": {
+		"_postman_id": "b0acd236-d038-4d04-8277-5cb1b4d0c153",
+		"name": "XTEST_DEMO_XML1",
+		"description": "Objective: XML responses are internally converted into JSON and can be used with any of the xtest functions. Validate an XML response using the function:\n\n``` javascript\nexpectResponseBodyToHaveProperty(jsonPath [String], expectedValue [String, Boolean, Number, or null])\n\n```",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24782047"
+	},
+	"item": [
+		{
+			"name": "Validate xml response using expectResponseBodyToHaveProperty().",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Load xtest",
+							"var xtest = eval(pm.globals.get(\"xtest\"));",
+							"",
+							"//Start testing using xtest",
+							"startXTest(pm, pm.globals.get(\"useStrictValidation\"));",
+							"",
+							"//Validate response body",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.id\", \"peZgYNd9BPtZtkxILwOSgxzyslXa5R8fHNy0LVyKk3U\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.fiCustomerId\", \"c0a8e426abdsferlklklkhshsl645c31\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.fiId\", \"DI1805\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.description\", \"Description - SNCO Uniform Loan\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.nickName\", \"Description - SNCO Uniform Loan\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.displayAccountNumber\", \"*1001\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.accountNumber.hostValue\", \"330001001\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.accountNumber.displayValue\", \"330001001\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.accountNumber.pfmValue\", \"330001001\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.accountNumber.rawHostValue\", \"330001001\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.category\", \"DEPOSIT\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.accountType\", \"CHECKING\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.fiAccountType.type\", \"1\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.fiAccountType.rawType\", \"1\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.fiAccountType.description\", \"Checking\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.ownershipType\", \"PRIMARY\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.balance.currentBalance.amount\", \"1234.4\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.balance.availableBalance.amount\", \"1123.41\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.accountStatus\", \"OPEN\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.accountStatuses.open\", \"true\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.accountStatuses.closed\", \"false\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.accountStatuses.negativeBalance\", \"false\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.accountStatuses.delinquent\", \"false\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.accountStatuses.inCollection\", \"false\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.accountStatuses.overLimit\", \"false\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.accountStatuses.writtenOff\", \"false\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.accountStatuses.creditBalance\", \"false\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.accountStatuses.paymentCoupon\", \"false\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.accountStatuses.retirementPlan\", \"false\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.accountStatuses.retPlanOwnedByDeceased\", \"false\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.displayFlag.summary\", \"true\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.displayFlag.transferFrom\", \"true\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.displayFlag.transferTo\", \"true\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.displayFlag.isHistoryEnabled\", \"true\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.displayFlag.isHistoryEntitled\", \"true\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.enabled\", \"true\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.accountHidden\", \"false\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.memberNumber\", \"CBS2XUSR012\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.ccAccountId\", \"330001001^1\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.accountStatusInt\", \"0\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.diAccountType\", \"1\");",
+							"expectResponseBodyToHaveProperty(\"Accounts.account.dcBillPayAccountNumber\", \"330001001\");",
+							"",
+							"//End testing using xtest",
+							"endXTest();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://xtest-demo.httpsim.schwaby.io/xml1",
+					"protocol": "https",
+					"host": [
+						"xtest-demo",
+						"httpsim",
+						"schwaby",
+						"io"
+					],
+					"path": [
+						"xml1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

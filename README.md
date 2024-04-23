@@ -3,14 +3,14 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/schwabyio/xrun/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/@schwabyio%252Fxrun)](https://www.npmjs.com/package/@schwabyio/xrun) [![code coverage](https://img.shields.io/badge/Code%20Coverage-80.32%25-green)](https://img.shields.io)
 
 ## Table of Contents
-- [Overview](#overview)
-- [Features](#features)
-- [Demos](#demos)
-  1. [Demo Primary Commands](#demo-primary-commands)
-  2. [Demo Reporting](#demo-reporting)
-- [Installation Steps](#installation-steps)
-- [Usage](#usage)
-- [Settings](#settings)
+
+- [xRun - CLI Runner For Postman](#xrun---cli-runner-for-postman)
+    - [Overview](#overview)
+    - [Features](#features)
+    - [Installation Steps](#installation-steps)
+    - [Update Steps](#update-steps)
+    - [Usage](#usage)
+    - [Settings](#settings)
 
 
 <br>
@@ -21,8 +21,8 @@
 xRun is a command line interface (CLI) app that extends [Newman](https://github.com/postmanlabs/newman) to enable your organization to run Postman tests with speed and at scale.
 
 ## Features
-* Direct support for [xtest!](https://github.com/schwabyio/xtest)
-* Run Postman tests in parallel.
+* Direct support for [xtest](https://github.com/schwabyio/xtest).
+* Run Postman tests in parallel by setting the `limitConcurrency` configuration.
 * Run tests locally or as part of Continuous Integration (CI) with your automated build server of choice.
 * Generates beautiful html reports that allow you to quickly filter and zero in on test failures.
 * Generate junit reports (provided by Postman's Newman).
@@ -30,29 +30,6 @@ xRun is a command line interface (CLI) app that extends [Newman](https://github.
 * Configurable settings.json file with command line override capability.
 * By default, all folders (and tests within) from the configured xRunProjectPath are run. You can exclude folders using an exclusion list.
 * Single out one or more tests to run by specifying a CSV list of test cases from the command line.
-
-<br>
-
-
-## Demos
-
-### Demo Primary Commands
-
-
-
-TODO
-
-
-
-
-### Demo Reporting
-
-
-
-TODO
-
-
-
 
 <br>
 
@@ -85,17 +62,24 @@ npm install -g @schwabyio/xrun
 % xrun
 No settings path is currently set. Please provide one below.
 What is the absolute path to your xrun settings.json file? /Users/john/xrun/settings.json
-The path you have provided is '/Users/john/xrun/settings.json
+The path you have provided is '/Users/john/xrun/settings.json'
 ```
 <br>
 
+
+## Update Steps
+To update to the latest version and dependencies.
+1. Run the following command:
+```console
+npm update -g @schwabyio/xrun
+```
 
 ## Usage
 ```console
 % xrun
 __________________________________________________________________________________________________________________________________
                                                                                                                                   
-                                                         xRun Ver. 2.2.0
+                                                         xRun Ver. 2.4.0
 __________________________________________________________________________________________________________________________________
 
 
