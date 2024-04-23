@@ -57,7 +57,23 @@ npm install -g @schwabyio/xrun
   "xRunProjectPath": "[PATH-TO-PROJECT-THAT-CONTAINS-POSTMAN-COLLECTIONS]"
 }
 ```
-4. The first time you run 'xrun' on the command line you will be prompted for the absolute path to the settings.json file. Type or paste the absolute path to the settings.json you created in step 3. Below is an example:
+4. The first time you run 'xrun' on the command line you will be prompted for the absolute path to the settings.json file. Type or paste the absolute path to the settings.json you created in step 3 above. Below is an example:
+```console
+% xrun
+No settings path is currently set. Please provide one below.
+What is the absolute path to your xrun settings.json file? /Users/john/xrun/settings.json
+The path you have provided is '/Users/john/xrun/settings.json'
+```
+
+<br>
+
+
+## Update Steps
+1. To update to the latest version, run the following command:
+```console
+npm update -g @schwabyio/xrun
+```
+2. The first time you run 'xrun' on the command line you will be prompted for the absolute path to the settings.json file. Type or paste the absolute path to the settings.json you created during step 3 of the install above. Below is an example:
 ```console
 % xrun
 No settings path is currently set. Please provide one below.
@@ -65,14 +81,6 @@ What is the absolute path to your xrun settings.json file? /Users/john/xrun/sett
 The path you have provided is '/Users/john/xrun/settings.json'
 ```
 <br>
-
-
-## Update Steps
-To update to the latest version and dependencies.
-1. Run the following command:
-```console
-npm update -g @schwabyio/xrun
-```
 
 ## Usage
 ```console
@@ -101,8 +109,7 @@ ________________________________________________________________________________
 <br>
 
 ## Settings
-All available settings are documented here:
-https://github.com/schwabyio/xrun/lib/json/settings-schema.json
+All available settings are [documented here](./lib/json/settings-schema.json).
 
 Settings Order of Precedence (lowest to highest):
 1. Default value
