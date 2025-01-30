@@ -114,7 +114,7 @@
       "arg": "xRunProjectPath"
     },
     "xRunProjectDirectoryName": {
-      "doc": "The name of the directory within xRunProjectPath used to store files used by xrun (e.g. <environmentType>.bulk, exclude-tests.json, etc.)",
+      "doc": "The name of the directory within project used to store files used by xrun (e.g. <environmentType>.bulk, exclude-tests.json, etc.)",
       "format": "non-empty-string",
       "default": "xrun",
       "arg": "xRunProjectDirectoryName"
