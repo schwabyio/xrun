@@ -5,3 +5,4 @@
 2. Add xtest version to summary.html report.
 3. Update to xtest `v1.2.1`.
 4. Properly fail test-script type errors and report errors in results.
+5. Fix issue with constructPostmanUrl when host is null/undefined.
