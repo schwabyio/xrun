@@ -6,3 +6,4 @@
 3. Update to xtest `v1.2.1`.
 4. Properly fail test-script type errors and report errors in results.
 5. Fix issue with constructPostmanUrl when host is null/undefined.
+6. Support directory names, in addition to collection names, when usibng the `<collectionAndOrDirectoryList>` CLI `<program-command>` option.

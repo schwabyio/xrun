@@ -79,10 +79,9 @@ try {
 
           const settings = await xRun.getSettings(settingsPath)
 
-          //Set collectionCSVList
-          const collectionCSVList = programCommand
+          const csvList = programCommand
 
-          const testFinalResult = await xRun.runCSVPostmanTests(settings, collectionCSVList)
+          const testFinalResult = await xRun.runCSVPostmanTests(settings, csvList)
 
           if (testFinalResult === 'PASSED') {
             process.exit(0)
