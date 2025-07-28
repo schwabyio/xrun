@@ -4,12 +4,6 @@
 # node_modules/
 node_modules/
 
-# test-results/
-test-results/
-
-# settings/app.json
-settings/app.json
-
 # code coverage reports
 coverage/
 
