@@ -37,7 +37,7 @@ xRun is a command line interface (CLI) app that extends [Newman](https://github.
 <br>
 
 ## Installation Steps
-1. Install Node.js ([recommended to install Node.js using node version manager](https://github.com/nvm-sh/nvm))
+1. Install Node.js (version >= 20) ([recommended to install Node.js using node version manager](https://github.com/nvm-sh/nvm))
 2. Install (and also to update) xRun:
 ```shell
 npm install -g @schwabyio/xrun
