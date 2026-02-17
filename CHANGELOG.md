@@ -1,8 +1,11 @@
 # Change Log
 
-## v3.2.0
+## v3.3.0
 1. Update to xtest `v1.5.0`.
 2. Dependency updates.
+
+## v3.2.0
+* no changes: skipping v3.2.0 due to npm publish issue
 
 ## v3.1.0
 1. Update to xtest `v1.4.0`.
