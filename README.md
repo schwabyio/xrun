@@ -5,16 +5,14 @@
 ## Table of Contents
 
 - [xRun - CLI Runner For Postman](#xrun---cli-runner-for-postman)
-    - [Overview](#overview)
-    - [Features](#features)
-    - [Installation Steps](#installation-steps)
-    - [Update Steps](#update-steps)
-    - [Uninstall Steps](#uninstall-steps)
-    - [Postman Structure](#postman-structure)
-    - [Test Case Project Repo Structure](#test-case-project-repo-structure)
-    - [Example xRun Project Repo](#example-xrun-project-repo)
-    - [Usage](#usage)
-    - [Settings](#settings)
+  - [Overview](#overview)
+  - [Features](#features)
+  - [Installation Steps](#installation-steps)
+  - [Uninstall Steps](#uninstall-steps)
+  - [xRun Project Repo Structure](#xrun-project-repo-structure)
+  - [Example xRun Project Repo](#example-xrun-project-repo)
+  - [Usage](#usage)
+  - [Settings](#settings)
 
 
 <br>
@@ -78,7 +76,7 @@ Example repo in structure required by xRun (also runnable - try it out):
 % xrun
 __________________________________________________________________________________________________________________________________
                                                                                                                                   
-                                                         xRun Ver. 3.0.0
+                                                         xRun Ver. 3.2.0
 __________________________________________________________________________________________________________________________________
 
 

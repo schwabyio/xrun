@@ -1,5 +1,9 @@
 # Change Log
 
+## v3.2.0
+1. Update to xtest `v1.5.0`.
+2. Dependency updates.
+
 ## v3.1.0
 1. Update to xtest `v1.4.0`.
 
