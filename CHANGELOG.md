@@ -1,5 +1,10 @@
 # Change Log
 
+## v3.4.1
+1. Fix `limitConcurrency`, `timeoutCollection`, `timeoutRequest` and `timeoutScript` being treated as strings when passed in from the command line (e.g. `--limitConcurrency 10` silently ran everything with a concurrency of 1).
+2. Fix broken unit tests: undefined `getDirectories` reference and missing `empty-directory` test fixture.
+3. Fix `getHostname.js` filename casing to `getHostName.js` to match how it is required (only resolved on case-insensitive file systems).
+
 ## v3.4.0
 1. Update to xtest `v1.6.0`.
 2. Dependency updates.
