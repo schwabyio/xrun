@@ -125,6 +125,12 @@
       "default": true,
       "arg": "ignoreRedirects"
     },
+    "dataFileDirectoryPath": {
+      "doc": "Directory path location of external data files (.csv or .json) used as Newman iteration data (i.e. the collection is run one time per data file row). If an absolute directory path is provided that will be used, otherwise if just a directory name is provided, it will look for that directory from within the configured xRunProjectDirectoryName (e.g. <xRunProjectPath>/xrun/data ). Note: 1. A data file is only used by the collection whose COLLECTION NAME matches the data file name (e.g. <xRunProjectPath>/xrun/data/MY_COLLECTION.csv is only used by the 'MY_COLLECTION' collection). 2. Collections without a matching data file run normally (one time). 3. When both a .csv and a .json data file exist for the same collection name, the .csv file is used.",
+      "format": "non-empty-string",
+      "default": "data",
+      "arg": "dataFileDirectoryPath"
+    },
     "trustedCaCertDirectoryPath": {
       "doc": "Directory path location to a single PEM formatted certificate file containing one or more trusted CAs. If an absolute directory path is provided that will be used, otherwise if just a directory name is provided, it will look for that directory from within the configured xRunProjectDirectoryName (e.g. <xRunProjectPath>/xrun/trustedCaCert ). Note: 1. The file name must not be included in the directory path. 2. Only one single pem file must exist in the directory (multiple CAs can be put in the single file). 3. The file must include a .pem file extension to be found.",
       "format": "non-empty-string",

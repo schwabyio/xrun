@@ -1,5 +1,14 @@
 # Change Log
 
+## v3.5.0
+1. Add support for external data files (`.csv` or `.json`) to drive a collection run (Newman `iterationData`). Place a data file named after a collection into `<your-project-repo>/xrun/data/` (e.g. `xrun/data/MY_COLLECTION.csv`) and that collection is run one time per data file row.
+2. Add new `dataFileDirectoryPath` setting to configure the data file directory location (defaults to `data`).
+3. Add data file name, iteration count and per test iteration labels to the collection html report.
+4. Fix `request` and `test-script` failure messages being reported against every iteration of a test instead of only the iteration that failed.
+5. Fix a collection that can NOT be run (e.g. an unreadable data file, a collection newman rejects) being silently reported as a collection that passed. It is now reported as a failed collection, named in the cli output and summary report, with the error shown in its collection html report.
+6. Increase unit test coverage from 71% to 97%.
+7. Fix the Request URL in the collection html report not matching the request Postman actually sent: query parameters were not separated by `&` (e.g. `?key1=value1key2=value2`), disabled query parameters were included and query parameters without a value were reported as `key=null`.
+
 ## v3.4.1
 1. Fix `limitConcurrency`, `timeoutCollection`, `timeoutRequest` and `timeoutScript` being treated as strings when passed in from the command line (e.g. `--limitConcurrency 10` silently ran everything with a concurrency of 1).
 2. Fix broken unit tests: undefined `getDirectories` reference and missing `empty-directory` test fixture.

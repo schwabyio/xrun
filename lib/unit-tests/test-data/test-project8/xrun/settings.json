@@ -1,0 +1,6 @@
+{
+    //A complete xrun project used by unit tests
+    "limitConcurrency": 2,
+    "projectName": "test-project8",
+    "environmentType": "dev1"
+}

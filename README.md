@@ -1,6 +1,6 @@
 ![xRun Image](./resources/images/xrun-logo-500.png)
 <!-- ![Postman Image](https://assets.getpostman.com/common-share/postman-logo-horizontal-320x132.png) -->
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/schwabyio/xrun/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/@schwabyio%252Fxrun)](https://www.npmjs.com/package/@schwabyio/xrun) [![code coverage](https://img.shields.io/badge/Code%20Coverage-71.42%25-green)](https://img.shields.io)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/schwabyio/xrun/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/@schwabyio%252Fxrun)](https://www.npmjs.com/package/@schwabyio/xrun) [![code coverage](https://img.shields.io/badge/Code%20Coverage-97.43%25-green)](https://img.shields.io)
 
 ## Table of Contents
 
@@ -11,6 +11,7 @@
   - [Uninstall Steps](#uninstall-steps)
   - [xRun Project Repo Structure](#xrun-project-repo-structure)
   - [Example xRun Project Repo](#example-xrun-project-repo)
+  - [Data Files](#data-files)
   - [Usage](#usage)
   - [Settings](#settings)
 
@@ -31,6 +32,7 @@ xRun is a command line interface (CLI) app that extends [Newman](https://github.
 * Configurable settings.json file with command line override capability.
 * By default, all folders (and tests within) are run. You can exclude folders using an exclusion list.
 * Single out one or more tests to run by specifying a CSV list of test cases and/or directories from the command line.
+* Drive a collection with an external data file (`.csv` or `.json`) - the collection is run one time per data file row.
 
 <br>
 
@@ -58,6 +60,8 @@ The xRun tool requires a Postman project repo to be in the following structure:
     ...
     ├── <directoryN-with-postman-json-files>/
     └── xrun/
+        ├── data/                          <-- optional (see Data Files)
+        │   └── <collection-name>.csv
         ├── exclude-list.json
         └── settings.json
 ```
@@ -71,12 +75,40 @@ Example repo in structure required by xRun (also runnable - try it out):
 
 <br>
 
+## Data Files
+A collection can be driven by an external data file (`.csv` or `.json`) - the same iteration data Newman supports. Each row of the data file runs the collection one time, and each column is available to the collection as a variable (e.g. `{{userId}}`) and through `pm.iterationData`.
+
+Data files live in `<your-project-repo>/xrun/data/` and a data file is **only** used by the collection whose COLLECTION NAME matches the data file name:
+```
+└── <your-project-repo>/
+    └── xrun/
+        └── data/
+            ├── MY_COLLECTION.csv          <-- only used by the 'MY_COLLECTION' collection
+            └── MY_OTHER_COLLECTION.json   <-- only used by the 'MY_OTHER_COLLECTION' collection
+```
+
+Example `xrun/data/MY_COLLECTION.csv` (the first row must be the column names):
+```csv
+userId,userName
+1001,user1
+1002,user2
+```
+The `MY_COLLECTION` collection above is run 2 times: once with `{{userId}}` set to `1001` and once with `{{userId}}` set to `1002`.
+
+Notes:
+* Collections without a matching data file run normally (one time).
+* The data file directory location is configurable using the `dataFileDirectoryPath` setting.
+* When both a `.csv` and a `.json` data file exist for the same collection name, the `.csv` file is used.
+* Data file runs are reported per iteration in the collection html report.
+
+<br>
+
 ## Usage
 ```shell
 % xrun
 __________________________________________________________________________________________________________________________________
                                                                                                                                   
-                                                         xRun Ver. 3.4.1
+                                                         xRun Ver. 3.5.0
 __________________________________________________________________________________________________________________________________
 
 

@@ -145,10 +145,30 @@
               <div class="col border rounded">{{collectionDescriptionHtml}}</div>
             </div>
 
+            {{#if errorMessageHtml}}
+              <div class="row mb-3">
+                <div class="col-2">Error</div>
+                <div class="col overflow-auto border rounded text-color-failed"><pre>{{errorMessageHtml}}</pre></div>
+              </div>
+            {{/if}}
+
             <div class="row mb-3">
               <div class="col-2">Time of Run</div>
               <div class="col-auto border rounded">{{dateTimeOfRunPrintable}}</div>
-            </div>            
+            </div>
+
+            {{#if dataFilePath}}
+              <div class="row mb-3">
+                <div class="col-2">Data File</div>
+                <div class="col border rounded">{{dataFilePath}}</div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-2">Iterations</div>
+                <div class="col-auto border rounded">{{iterationsTotal}}</div>
+              </div>
+            {{/if}}
+
           </div>
 
 
@@ -246,7 +266,7 @@
   <div class="accordion-item {{stepResult}} show">
     
     <h2 class="accordion-header" id="heading-{{increment @index}}">
-      <button class="accordion-button accordion-button-{{stepResult}}" type="button" data-bs-toggle="collapse" data-bs-target="#step-{{increment @index}}" aria-expanded="true" aria-controls="step-{{increment @index}}">Test {{increment @index}}: {{name}}</button>
+      <button class="accordion-button accordion-button-{{stepResult}}" type="button" data-bs-toggle="collapse" data-bs-target="#step-{{increment @index}}" aria-expanded="true" aria-controls="step-{{increment @index}}">Test {{increment @index}}: {{#if iterationLabel}}{{iterationLabel}} {{/if}}{{name}}</button>
     </h2>
     
     <div id="step-{{increment @index}}" class="accordion-collapse collapse show" aria-labelledby="heading-{{increment @index}}">
